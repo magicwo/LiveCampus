@@ -23,3 +23,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+#网易云推流
+-keep class com.netease.** { *; }
+-keep class jp.co.cyberagent.android.gpuimage.** { *; }
