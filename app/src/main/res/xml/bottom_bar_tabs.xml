@@ -1,0 +1,21 @@
+<tabs>
+    <tab
+        id="@+id/tab_index"
+        icon="@drawable/icon_found_selector"
+        title="首页"
+        activeColor="#35b1e0"
+        />
+    <tab
+        id="@+id/tab_live"
+        icon="@drawable/icon_through_selector"
+        title="直播"
+        activeColor="#35b1e0"
+        />
+    <tab
+        id="@+id/tab_user"
+        icon="@drawable/icon_message_selector"
+        title="个人"
+        activeColor="#35b1e0"
+        />
+
+</tabs>

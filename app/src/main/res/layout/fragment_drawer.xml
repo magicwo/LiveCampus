@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#F1F6FE"
+        android:padding="17dp">
+
+        <com.liji.circleimageview.CircleImageView
+            android:id="@+id/drawer_head_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/testhead" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="23dp"
+            android:layout_toRightOf="@+id/drawer_head_img"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/drawer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Magicwo"
+                android:textColor="@color/textColorBlack"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/drawer_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="地下城与勇士：沃势如暴雨"
+                android:textColor="@color/textColorHint"
+                android:textSize="12dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/drawer_like_tv"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@drawable/commom_rect_selector"
+            android:drawableLeft="@drawable/icon_ct_like"
+            android:drawablePadding="33dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:text="直播"
+            android:textColor="@color/textColorBlack"
+            android:textSize="16dp"
+
+            />
+
+        <TextView
+            android:id="@+id/drawer_wallet_tv"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@drawable/commom_rect_selector"
+            android:drawableLeft="@drawable/icon_ct_wallet"
+            android:drawablePadding="33dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:text="我的积分"
+            android:textColor="@color/textColorBlack"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/drawer_setting_tv"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@drawable/commom_rect_selector"
+            android:drawableLeft="@drawable/icon_ct_set_up"
+            android:drawablePadding="33dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:text="设置"
+            android:textColor="@color/textColorBlack"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/drawer_recommended_tv"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@drawable/commom_rect_selector"
+            android:drawableLeft="@drawable/icon_ct_recommended"
+            android:drawablePadding="33dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:text="应用推荐"
+            android:textColor="@color/textColorBlack"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+</LinearLayout>

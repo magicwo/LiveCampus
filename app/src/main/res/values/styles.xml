@@ -17,4 +17,37 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="MediaController_SeekBar" parent="android:Widget.SeekBar">
+        <item name="android:progressDrawable">@drawable/nemediacontroller_progressbar</item>
+        <item name="android:indeterminateDrawable">@drawable/nemediacontroller_progressbar</item>
+        <item name="android:minHeight">5dip</item>
+        <item name="android:maxHeight">5dip</item>
+        <item name="android:thumb">@drawable/nemediacontroller_progressbar_thumb</item>
+        <item name="android:thumbOffset">8dip</item>
+        <item name="android:paddingLeft">8dip</item>
+        <item name="android:paddingRight">8dip</item>
+    </style>
+
+    <style name="MediaController_Text">
+        <item name="android:textColor">#bfbfbf</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--启动页背景style-->
+    <style name="MyAppSplash" parent="AppTheme.NoActionBar">
+        <item name="android:background">@drawable/splash_icon</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="FullScreen" parent="AppTheme.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <!--Custom Toolbar Style -->
+    <style name="mToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
+
+        <!-- 设置该属性解决Toolbar左边空白 -->
+        <item name="contentInsetStart">0dp</item>
+
+    </style>
+
 </resources>
