@@ -12,9 +12,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpHeaders;
+import com.lzy.okgo.request.BaseRequest;
+import com.magicwo.com.magiclib.constant.DataSaveConstant;
+import com.uestc.magicwo.livecampusandroid.net.BaseResponse;
+import com.uestc.magicwo.livecampusandroid.net.JsonCallback;
+import com.uestc.magicwo.livecampusandroid.net.SimpleResponse;
+import com.uestc.magicwo.livecampusandroid.net.Urls;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import okhttp3.Call;
+import okhttp3.Response;
+
 public class Login extends Activity {                 //登录界面活动
 
-    public int pwdresetFlag=0;
+    public int pwdresetFlag = 0;
     private EditText mAccount;                        //用户名编辑
     private EditText mPwd;                            //密码编辑
     private Button mRegisterButton;                   //注册按钮
@@ -23,7 +39,7 @@ public class Login extends Activity {                 //登录界面活动
     private CheckBox mRememberCheck;
 
     private SharedPreferences login_sp;
-    private String userNameValue,passwordValue;
+    private String userNameValue, passwordValue;
 
     private View loginView;                           //登录
     private View loginSuccessView;
@@ -42,21 +58,21 @@ public class Login extends Activity {                 //登录界面活动
         mRegisterButton = (Button) findViewById(R.id.login_btn_register);
         mLoginButton = (Button) findViewById(R.id.login_btn_login);
         mCancleButton = (Button) findViewById(R.id.login_btn_cancle);
-        loginView=findViewById(R.id.login_view);
-        loginSuccessView=findViewById(R.id.login_success_view);
-        loginSuccessShow=(TextView) findViewById(R.id.login_success_show);
+        loginView = findViewById(R.id.login_view);
+        loginSuccessView = findViewById(R.id.login_success_view);
+        loginSuccessShow = (TextView) findViewById(R.id.login_success_show);
 
         mChangepwdText = (TextView) findViewById(R.id.login_text_change_pwd);
 
         mRememberCheck = (CheckBox) findViewById(R.id.Login_Remember);
 
         login_sp = getSharedPreferences("userInfo", 0);
-        String name=login_sp.getString("USER_NAME", "");
-        String pwd =login_sp.getString("PASSWORD", "");
-        boolean choseRemember =login_sp.getBoolean("mRememberCheck", false);
-        boolean choseAutoLogin =login_sp.getBoolean("mAutologinCheck", false);
+        String name = login_sp.getString("USER_NAME", "");
+        String pwd = login_sp.getString("PASSWORD", "");
+        boolean choseRemember = login_sp.getBoolean("mRememberCheck", false);
+        boolean choseAutoLogin = login_sp.getBoolean("mAutologinCheck", false);
         //如果上次选了记住密码，那进入登录页面也自动勾选记住密码，并填上用户名和密码
-        if(choseRemember){
+        if (choseRemember) {
             mAccount.setText(name);
             mPwd.setText(pwd);
             mRememberCheck.setChecked(true);
@@ -75,11 +91,12 @@ public class Login extends Activity {                 //登录界面活动
             mUserDataManager.openDataBase();                              //建立本地数据库
         }
     }
+
     View.OnClickListener mListener = new View.OnClickListener() {                  //不同按钮按下的监听事件选择
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.login_btn_register:                            //登录界面的注册按钮
-                    Intent intent_Login_to_Register = new Intent(Login.this,Register.class) ;    //切换Login Activity至User Activity
+                    Intent intent_Login_to_Register = new Intent(Login.this, Register.class);    //切换Login Activity至User Activity
                     startActivity(intent_Login_to_Register);
                     finish();
                     break;
@@ -90,7 +107,7 @@ public class Login extends Activity {                 //登录界面活动
                     cancel();
                     break;
                 case R.id.login_text_change_pwd:                             //登录界面的注销按钮
-                    Intent intent_Login_to_reset = new Intent(Login.this,Resetpwd.class) ;    //切换Login Activity至User Activity
+                    Intent intent_Login_to_reset = new Intent(Login.this, Resetpwd.class);    //切换Login Activity至User Activity
                     startActivity(intent_Login_to_reset);
                     finish();
                     break;
@@ -102,44 +119,45 @@ public class Login extends Activity {                 //登录界面活动
         if (isUserNameAndPwdValid()) {
             String userName = mAccount.getText().toString().trim();    //获取当前输入的用户名和密码信息
             String userPwd = mPwd.getText().toString().trim();
-            SharedPreferences.Editor editor =login_sp.edit();
-            int result=mUserDataManager.findUserByNameAndPwd(userName, userPwd);
-            if(result==1){                                             //返回1说明用户名和密码均正确
+            SharedPreferences.Editor editor = login_sp.edit();
+            int result = mUserDataManager.findUserByNameAndPwd(userName, userPwd);
+            if (result == 1) {                                             //返回1说明用户名和密码均正确
                 //保存用户名和密码
                 editor.putString("USER_NAME", userName);
                 editor.putString("PASSWORD", userPwd);
 
                 //是否记住密码
-                if(mRememberCheck.isChecked()){
+                if (mRememberCheck.isChecked()) {
                     editor.putBoolean("mRememberCheck", true);
-                }else{
+                } else {
                     editor.putBoolean("mRememberCheck", false);
                 }
                 editor.commit();
 
-                Intent intent = new Intent(Login.this,User.class) ;    //切换Login Activity至User Activity
+                Intent intent = new Intent(Login.this, User.class);    //切换Login Activity至User Activity
                 startActivity(intent);
                 finish();
-                Toast.makeText(this, getString(R.string.login_success),Toast.LENGTH_SHORT).show();//登录成功提示
-            }else if(result==0){
-                Toast.makeText(this, getString(R.string.login_fail),Toast.LENGTH_SHORT).show();  //登录失败提示
+                Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_SHORT).show();//登录成功提示
+            } else if (result == 0) {
+                Toast.makeText(this, getString(R.string.login_fail), Toast.LENGTH_SHORT).show();  //登录失败提示
             }
         }
     }
+
     public void cancel() {           //注销
         if (isUserNameAndPwdValid()) {
             String userName = mAccount.getText().toString().trim();    //获取当前输入的用户名和密码信息
             String userPwd = mPwd.getText().toString().trim();
-            int result=mUserDataManager.findUserByNameAndPwd(userName, userPwd);
-            if(result==1){                                             //返回1说明用户名和密码均正确
+            int result = mUserDataManager.findUserByNameAndPwd(userName, userPwd);
+            if (result == 1) {                                             //返回1说明用户名和密码均正确
 //                Intent intent = new Intent(Login.this,User.class) ;    //切换Login Activity至User Activity
 //                startActivity(intent);
-                Toast.makeText(this, getString(R.string.cancel_success),Toast.LENGTH_SHORT).show();//登录成功提示
+                Toast.makeText(this, getString(R.string.cancel_success), Toast.LENGTH_SHORT).show();//登录成功提示
                 mPwd.setText("");
                 mAccount.setText("");
                 mUserDataManager.deleteUserDatabyname(userName);
-            }else if(result==0){
-                Toast.makeText(this, getString(R.string.cancel_fail),Toast.LENGTH_SHORT).show();  //登录失败提示
+            } else if (result == 0) {
+                Toast.makeText(this, getString(R.string.cancel_fail), Toast.LENGTH_SHORT).show();  //登录失败提示
             }
         }
 
@@ -181,4 +199,22 @@ public class Login extends Activity {                 //登录界面活动
         super.onPause();
     }
 
+    //网络请求Get方法的示例,具体请大洋参考官方文档
+    //登录请求 post
+    private void loginApi() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("username", "这里改成用户名");
+        params.put("password", "这里改成密码");
+        JSONObject jsonObject = new JSONObject(params);
+        OkGo.post(Urls.LOGIN)
+                .tag(this)
+                .upJson(jsonObject)
+                .execute(new JsonCallback<BaseResponse<SimpleResponse>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<SimpleResponse> simpleResponseBaseResponse, Call call, Response response) {
+
+                    }
+                });
+
+    }
 }
