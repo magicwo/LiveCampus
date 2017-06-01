@@ -1,7 +1,23 @@
 [
     {
+        "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-v21\\abc_btn_colored_material.xml",
+        "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\drawable-v21\\abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-v21\\notification_action_background.xml",
+        "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\drawable-v21\\notification_action_background.xml"
+    },
+    {
+        "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-v21\\abc_edit_text_material.xml",
+        "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\drawable-v21\\abc_edit_text_material.xml"
+    },
+    {
         "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-v21\\abc_edit_text_material.xml",
         "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\drawable-v21\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-v21\\abc_action_bar_item_background_material.xml",
+        "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\drawable-v21\\abc_action_bar_item_background_material.xml"
     },
     {
         "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-v21\\abc_btn_colored_material.xml",

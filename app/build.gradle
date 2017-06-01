@@ -43,4 +43,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
     compile project(':magiclib')
+    //网络请求库
+    //
+    compile 'com.lzy.net:okgo:2.1.4'
 }

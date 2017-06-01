@@ -60,13 +60,24 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-
+        <activity
+            android:name=".Login"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Register"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Resetpwd"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".User"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".videoplayer.NEVideoPlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/FullScreen"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreen">
 
         </activity>
         <activity

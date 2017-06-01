@@ -1,7 +1,19 @@
 [
     {
+        "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
         "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png",
         "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-ldrtl-mdpi-v17\\abc_spinner_mtrl_am_alpha.9.png",
+        "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\drawable-ldrtl-mdpi-v17\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\release\\drawable-ldrtl-mdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png",
