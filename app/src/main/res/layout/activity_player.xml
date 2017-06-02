@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <com.uestc.magicwo.livecampusandroid.videoplayer.NEVideoView
+    <com.uestc.magicwo.livecampus.videoplayer.NEVideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

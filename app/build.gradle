@@ -46,7 +46,6 @@ dependencies {
     //网络请求库
     //
     compile 'com.lzy.net:okgo:2.1.4'
-
     //b站弹幕显示框架
     compile 'com.github.ctiao:DanmakuFlameMaster:0.8.3'
     compile 'com.github.ctiao:ndkbitmap-armv7a:0.8.3'
@@ -54,4 +53,5 @@ dependencies {
     compile 'com.github.ctiao:ndkbitmap-armv5:0.8.3'
     compile 'com.github.ctiao:ndkbitmap-x86:0.8.3'
     //b站弹幕显示框架
+    compile files('libs/yunba-sdk-release1.8.5.jar')
 }

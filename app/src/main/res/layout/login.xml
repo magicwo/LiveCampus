@@ -7,7 +7,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context="com.uestc.magicwo.livecampusandroid.User">
+    tools:context="com.uestc.magicwo.livecampusandroid.com.uestc.magicwo.livecampus.User">
     <RelativeLayout
         android:id="@+id/login_view"
         android:layout_width="400dp"

@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
        >
         <!-- This could be your fragment container, or something -->
-        <com.uestc.magicwo.livecampusandroid.custom.CustomViewPager
+        <com.uestc.magicwo.livecampus.custom.CustomViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
