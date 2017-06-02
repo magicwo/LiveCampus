@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    >
+    android:background="#000000">
 
     <com.uestc.magicwo.livecampusandroid.videoplayer.NEVideoView
         android:id="@+id/video_view"
@@ -11,13 +10,18 @@
         android:layout_height="match_parent"
         android:layout_gravity="center" />
 
+    <master.flame.danmaku.ui.widget.DanmakuView
+        android:id="@+id/danmaku_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <RelativeLayout
         android:id="@+id/play_toolbar"
         android:layout_width="match_parent"
         android:layout_height="40dip"
-        android:layout_marginTop="0.0dip"
         android:layout_marginLeft="0.0dip"
         android:layout_marginRight="0.0dip"
+        android:layout_marginTop="0.0dip"
         android:background="@drawable/nemediacontroller_bg">
 
         <ImageButton
@@ -26,8 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="7dip"
-            android:src="@drawable/ic_play_exit"
-            />
+            android:src="@drawable/ic_play_exit" />
 
         <TextView
             android:id="@+id/file_name"
@@ -35,11 +38,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
             android:gravity="center"
             android:maxWidth="200dip"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:focusable="true"/>
+            android:singleLine="true" />
     </RelativeLayout>
 
     <LinearLayout
@@ -48,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
