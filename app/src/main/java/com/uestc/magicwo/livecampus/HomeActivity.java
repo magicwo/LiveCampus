@@ -24,7 +24,6 @@ import com.uestc.magicwo.livecampus.custom.CustomViewPager;
 import com.uestc.magicwo.livecampus.index.IndexFragment;
 import com.uestc.magicwo.livecampus.live.LiveFragment;
 import com.uestc.magicwo.livecampus.user.UserFragment;
-import com.uestc.magicwo.livecampusandroid.R;
 import com.uestc.magicwo.livecampus.user.DrawerFragment;
 
 import java.util.ArrayList;

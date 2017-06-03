@@ -1,7 +1,7 @@
 package com.uestc.magicwo.livecampus.live;
 
 
-import com.uestc.magicwo.livecampusandroid.R;
+import com.uestc.magicwo.livecampus.R;
 import com.uestc.magicwo.livecampus.appbase.AppBaseFragment;
 
 

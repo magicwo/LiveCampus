@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.uestc.magicwo.livecampusandroid.R;
 
 public class Register extends AppCompatActivity {
     private EditText mAccount;                        //用户名编辑

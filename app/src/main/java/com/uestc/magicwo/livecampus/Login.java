@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lzy.okgo.OkGo;
-import com.uestc.magicwo.livecampusandroid.R;
 import com.uestc.magicwo.livecampus.net.BaseResponse;
 import com.uestc.magicwo.livecampus.net.JsonCallback;
 import com.uestc.magicwo.livecampus.net.SimpleResponse;

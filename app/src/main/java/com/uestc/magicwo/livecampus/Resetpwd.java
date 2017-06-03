@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.uestc.magicwo.livecampusandroid.R;
 
 public class Resetpwd extends AppCompatActivity {
     private EditText mAccount;                        //用户名编辑

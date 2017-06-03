@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import com.dinuscxj.itemdecoration.GridOffsetsItemDecoration;
 import com.liji.circleimageview.CircleImageView;
+import com.uestc.magicwo.livecampus.R;
 import com.uestc.magicwo.livecampus.videoplayer.NEVideoPlayerActivity;
 import com.uestc.magicwo.livecampus.BaseApplication;
-import com.uestc.magicwo.livecampusandroid.R;
 import com.uestc.magicwo.livecampus.appbase.AppBaseFragment;
 
 import java.util.ArrayList;

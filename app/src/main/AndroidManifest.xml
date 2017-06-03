@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.uestc.magicwo.livecampusandroid">
+    package="com.uestc.magicwo.livecampus">
 
     <!-- 权限声明 -->
     <!-- 允许程序打开网络套接字 -->
@@ -107,7 +107,9 @@
         <meta-data
             android:name="YUNBA_APPKEY"
             android:value="5930d133c714b4903f936da8" />
-        <service android:name="io.yunba.android.core.YunBaService"></service>
+        <service
+            android:name="io.yunba.android.core.YunBaService"
+            android:exported="true" />
         <receiver android:name="io.yunba.android.core.YunBaReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -115,10 +117,10 @@
             </intent-filter>
         </receiver>
         <!--<receiver android:name="com.uestc.magicwo.livecampus.broadcastReceiver.MyPushReceiver">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="io.yunba.android.MESSAGE_RECEIVED_ACTION" />-->
-                <!--<category android:name="${applicationId}" />-->
-            <!--</intent-filter>-->
+        <!--<intent-filter>-->
+        <!--<action android:name="io.yunba.android.MESSAGE_RECEIVED_ACTION" />-->
+        <!--<category android:name="${applicationId}" />-->
+        <!--</intent-filter>-->
         <!--</receiver>-->
 
     </application>

@@ -41,7 +41,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 
-import com.uestc.magicwo.livecampusandroid.R;
+import com.uestc.magicwo.livecampus.R;
 
 import java.util.Locale;
 

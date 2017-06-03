@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.netease.neliveplayer.NELivePlayer;
 import com.netease.neliveplayer.NEMediaPlayer;
-import com.uestc.magicwo.livecampusandroid.R;
+import com.uestc.magicwo.livecampus.R;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -153,12 +153,12 @@ public class NEVideoPlayerActivity extends Activity {
 
     private void registerReceiver() {
         //订阅topic
-        YunBaManager.start(this);
-        YunBaManager.subscribe(this, "wujinwo",
+        YunBaManager.start(getApplicationContext());
+        YunBaManager.subscribe(getApplicationContext(), "wujinwo",
                 new IMqttActionListener() {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {
-                        Toast.makeText(NEVideoPlayerActivity.this, "订阅成功", Toast.LENGTH_SHORT).show();
+                        Log.e("-------------->", "成功");
                     }
 
                     @Override
@@ -166,7 +166,7 @@ public class NEVideoPlayerActivity extends Activity {
                         if (exception instanceof MqttException) {
                             MqttException ex = (MqttException) exception;
                             String msg = "Subscribe failed with error code : " + ex.getReasonCode();
-                            Toast.makeText(NEVideoPlayerActivity.this,msg, Toast.LENGTH_SHORT).show();
+                            Log.e("-------------->", msg);
                         }
 
                     }
@@ -174,6 +174,7 @@ public class NEVideoPlayerActivity extends Activity {
         );
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("io.yunba.android.MESSAGE_RECEIVED_ACTION");
+        intentFilter.addCategory(getPackageName());
         pushMessageReceiver = new PushMessageReceiver();
         registerReceiver(pushMessageReceiver, intentFilter);//注册广播监听
     }
@@ -187,6 +188,7 @@ public class NEVideoPlayerActivity extends Activity {
 
                 String topic = intent.getStringExtra(YunBaManager.MQTT_TOPIC);
                 String msg = intent.getStringExtra(YunBaManager.MQTT_MSG);
+                Log.e("-------------->", msg);
                 addDanmaku(msg, true);
             }
 
@@ -345,7 +347,6 @@ public class NEVideoPlayerActivity extends Activity {
                 new IMqttActionListener() {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {
-                        Toast.makeText(NEVideoPlayerActivity.this, "取消订阅成功", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

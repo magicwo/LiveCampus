@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.liji.circleimageview.CircleImageView;
 import com.uestc.magicwo.livecampus.Login;
+import com.uestc.magicwo.livecampus.R;
 import com.uestc.magicwo.livecampus.appbase.AppBaseFragment;
-import com.uestc.magicwo.livecampusandroid.R;
 
 import butterknife.BindView;
 

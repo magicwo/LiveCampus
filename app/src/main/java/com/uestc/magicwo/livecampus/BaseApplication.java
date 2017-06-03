@@ -11,6 +11,7 @@ import com.lzy.okgo.model.HttpHeaders;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.logging.Level;
 
@@ -37,7 +38,26 @@ public class BaseApplication extends Application {
     }
 
     private void setYunBa() {
-        YunBaManager.start(getApplicationContext());
+//        //订阅topic
+//        YunBaManager.start(getApplicationContext());
+//        YunBaManager.subscribe(getApplicationContext(), "wujinwo",
+//                new IMqttActionListener() {
+//                    @Override
+//                    public void onSuccess(IMqttToken asyncActionToken) {
+//                        Log.e("-------------->", "成功");
+//                    }
+//
+//                    @Override
+//                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+//                        if (exception instanceof MqttException) {
+//                            MqttException ex = (MqttException) exception;
+//                            String msg = "Subscribe failed with error code : " + ex.getReasonCode();
+//                            Log.e("-------------->", msg);
+//                        }
+//
+//                    }
+//                }
+//        );
 //        YunBaManager.subscribe(getApplicationContext(), new String[]{"t1"}, new IMqttActionListener() {
 //
 //            @Override
