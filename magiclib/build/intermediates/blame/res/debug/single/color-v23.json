@@ -1,19 +1,7 @@
 [
     {
-        "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_seek_thumb.xml",
-        "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\color-v23\\abc_tint_seek_thumb.xml"
-    },
-    {
         "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_btn_checkable.xml",
         "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\color-v23\\abc_tint_btn_checkable.xml"
-    },
-    {
-        "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_edittext.xml",
-        "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\color-v23\\abc_tint_edittext.xml"
-    },
-    {
-        "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_btn_checkable.xml",
-        "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\color-v23\\abc_tint_btn_checkable.xml"
     },
     {
         "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_seek_thumb.xml",
@@ -26,10 +14,6 @@
     {
         "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_btn_colored_borderless_text_material.xml",
         "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
-    },
-    {
-        "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
-        "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\color-v23\\abc_color_highlight_material.xml"
     },
     {
         "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_switch_track.xml",
@@ -48,27 +32,7 @@
         "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\color-v23\\abc_tint_spinner.xml"
     },
     {
-        "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_switch_track.xml",
-        "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\color-v23\\abc_tint_switch_track.xml"
-    },
-    {
-        "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_default.xml",
-        "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\color-v23\\abc_tint_default.xml"
-    },
-    {
-        "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_switch_thumb.xml",
-        "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\color-v23\\abc_tint_switch_thumb.xml"
-    },
-    {
         "merged": "D:\\MyLiveCampus\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_default.xml",
         "source": "C:\\Users\\Magicwo\\.android\\build-cache\\3ca227e95b36cc7cf5553c757dc4a75abe4b5fc3\\output\\res\\color-v23\\abc_tint_default.xml"
-    },
-    {
-        "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_btn_colored_borderless_text_material.xml",
-        "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
-    },
-    {
-        "merged": "E:\\AndroidStudioProjects\\LiveCampusAndroid\\magiclib\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_spinner.xml",
-        "source": "C:\\Users\\zhai\\.android\\build-cache\\530dd274fc10ff56776b6d04349777523e7c9b69\\output\\res\\color-v23\\abc_tint_spinner.xml"
     }
 ]

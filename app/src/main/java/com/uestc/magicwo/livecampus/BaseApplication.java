@@ -38,18 +38,18 @@ public class BaseApplication extends Application {
 
     private void setYunBa() {
         YunBaManager.start(getApplicationContext());
-        YunBaManager.subscribe(getApplicationContext(), new String[]{"t1"}, new IMqttActionListener() {
-
-            @Override
-            public void onSuccess(IMqttToken arg0) {
-                Log.d("订阅", "Subscribe topic succeed");
-            }
-
-            @Override
-            public void onFailure(IMqttToken arg0, Throwable arg1) {
-                Log.d("订阅", "Subscribe topic failed");
-            }
-        });
+//        YunBaManager.subscribe(getApplicationContext(), new String[]{"t1"}, new IMqttActionListener() {
+//
+//            @Override
+//            public void onSuccess(IMqttToken arg0) {
+//                Log.d("订阅", "Subscribe topic succeed");
+//            }
+//
+//            @Override
+//            public void onFailure(IMqttToken arg0, Throwable arg1) {
+//                Log.d("订阅", "Subscribe topic failed");
+//            }
+//        });
     }
 
     /**

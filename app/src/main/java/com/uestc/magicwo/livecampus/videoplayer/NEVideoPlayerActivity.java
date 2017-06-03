@@ -1,10 +1,14 @@
 package com.uestc.magicwo.livecampus.videoplayer;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,16 +17,22 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.netease.neliveplayer.NELivePlayer;
 import com.netease.neliveplayer.NEMediaPlayer;
 import com.uestc.magicwo.livecampusandroid.R;
+
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.yunba.android.manager.YunBaManager;
 import master.flame.danmaku.controller.DrawHandler;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
 import master.flame.danmaku.danmaku.model.DanmakuTimer;
@@ -75,6 +85,8 @@ public class NEVideoPlayerActivity extends Activity {
         }
     };//弹幕解析器
 
+    private PushMessageReceiver pushMessageReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +95,7 @@ public class NEVideoPlayerActivity extends Activity {
         ButterKnife.bind(this);
 
         initDanmakus();//初始化弹幕相关
-
+        registerReceiver();
         //接收MainActivity传过来的参数
         mMediaType = getIntent().getStringExtra("media_type");
         mDecodeType = getIntent().getStringExtra("decode_type");
@@ -139,6 +151,48 @@ public class NEVideoPlayerActivity extends Activity {
         mMediaController.setOnHiddenListener(mOnHiddenListener); //监听mediacontroller是否隐藏
     }
 
+    private void registerReceiver() {
+        //订阅topic
+        YunBaManager.start(this);
+        YunBaManager.subscribe(this, "wujinwo",
+                new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                        Toast.makeText(NEVideoPlayerActivity.this, "订阅成功", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                        if (exception instanceof MqttException) {
+                            MqttException ex = (MqttException) exception;
+                            String msg = "Subscribe failed with error code : " + ex.getReasonCode();
+                            Toast.makeText(NEVideoPlayerActivity.this,msg, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }
+        );
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("io.yunba.android.MESSAGE_RECEIVED_ACTION");
+        pushMessageReceiver = new PushMessageReceiver();
+        registerReceiver(pushMessageReceiver, intentFilter);//注册广播监听
+    }
+
+    public class PushMessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if (YunBaManager.MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+
+                String topic = intent.getStringExtra(YunBaManager.MQTT_TOPIC);
+                String msg = intent.getStringExtra(YunBaManager.MQTT_MSG);
+                addDanmaku(msg, true);
+            }
+
+        }
+    }
+
     //弹幕相关从此开始
     private void initDanmakus() {
         danmakuView.enableDanmakuDrawingCache(true);//设置缓存
@@ -147,7 +201,7 @@ public class NEVideoPlayerActivity extends Activity {
             public void prepared() {
                 showDanmaku = true;
                 danmakuView.start();
-                generateSomeDanmaku();
+//                generateSomeDanmaku();
             }
 
             @Override
@@ -286,6 +340,24 @@ public class NEVideoPlayerActivity extends Activity {
             danmakuView.release();
             danmakuView = null;
         }
+        unregisterReceiver(pushMessageReceiver);
+        YunBaManager.unsubscribe(this, "wujinwo",
+                new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                        Toast.makeText(NEVideoPlayerActivity.this, "取消订阅成功", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                        if (exception instanceof MqttException) {
+                            MqttException ex = (MqttException) exception;
+                            String msg = "Subscribe failed with error code : " + ex.getReasonCode();
+                        }
+
+                    }
+                }
+        );
     }
 
     @Override
@@ -312,4 +384,5 @@ public class NEVideoPlayerActivity extends Activity {
         Log.d(TAG, "NEVideoPlayerActivity onRestart");
         super.onRestart();
     }
+
 }
