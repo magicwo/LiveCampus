@@ -19,7 +19,7 @@ public class User extends AppCompatActivity {
     }
     public void back_to_login(View view) {
         //setContentView(R.layout.login);
-        Intent intent3 = new Intent(User.this,Login.class) ;
+        Intent intent3 = new Intent(User.this,LoginActivity.class) ;
         startActivity(intent3);
         finish();
 

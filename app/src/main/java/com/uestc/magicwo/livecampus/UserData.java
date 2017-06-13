@@ -2,6 +2,7 @@ package com.uestc.magicwo.livecampus;
 
 /**
  * Created by zhai on 2017/5/26.
+ * 用于存储
  */
 
 public class UserData {

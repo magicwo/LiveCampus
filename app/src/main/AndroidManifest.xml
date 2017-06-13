@@ -73,13 +73,13 @@
 
         </activity>
         <activity
-            android:name="com.uestc.magicwo.livecampus.Login"
+            android:name="com.uestc.magicwo.livecampus.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="com.uestc.magicwo.livecampus.Register"
+            android:name="com.uestc.magicwo.livecampus.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="com.uestc.magicwo.livecampus.Resetpwd"
+            android:name="com.uestc.magicwo.livecampus.ResetpwdActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="com.uestc.magicwo.livecampus.User"
@@ -122,6 +122,14 @@
         <!--<category android:name="${applicationId}" />-->
         <!--</intent-filter>-->
         <!--</receiver>-->
+
+        <!--网易云直播推送部分-->
+
+        <activity
+            android:name=".videostreaming.CameraPreviewActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen" />
 
     </application>
 
