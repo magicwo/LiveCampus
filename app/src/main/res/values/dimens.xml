@@ -19,4 +19,6 @@
     <dimen name="text_19dp">19dp</dimen>
     <dimen name="text_20dp">20dp</dimen>
     <dimen name="text_24dp">24dp</dimen>
+
+    <dimen name="button_corner_radius">5dp</dimen>
 </resources>

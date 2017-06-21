@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#35b1e0</color>
     <color name="colorPrimaryDark">#35b1e0</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#35b1e0</color>
     <color name="white">#FFFFFF</color>
     <!--app的主题颜色-->
     <color name="app_color">#35b1e0</color>

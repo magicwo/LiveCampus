@@ -15,14 +15,14 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            android:layout_marginBottom="56dp" />
+            android:layout_marginBottom="0dp" />
 
         <com.roughike.bottombar.BottomBar
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="0dp"
             android:layout_alignParentBottom="true"
+            android:visibility="gone"
             app:bb_tabXmlResource="@xml/bottom_bar_tabs" />
     </RelativeLayout>
 

@@ -7,34 +7,40 @@ import java.io.Serializable;
  */
 public class BaseResponse<T> implements Serializable {
     private static final long serialVersionUID = -8791367038185462865L;
-    private String error;
-    private T value;
-    private boolean success;
+    private int code;
+    private T ret;
+    private String uid;
+    private String token;
 
-
-    public String getError() {
-        return error;
+    public String getUid() {
+        return uid;
     }
 
-
-    public boolean isSuccess() {
-        return success;
+    public String getToken() {
+        return token;
     }
 
-    public T getValue() {
-        return value;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public int getCode() {
+        return code;
     }
 
-    public void setValue(T value) {
-        this.value = value;
+    public T getRet() {
+        return ret;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setRet(T ret) {
+        this.ret = ret;
     }
 }

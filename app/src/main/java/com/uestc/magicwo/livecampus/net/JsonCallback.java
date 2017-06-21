@@ -81,12 +81,49 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
             //有数据类型，表示有data
             BaseResponse baseResponse = Convert.fromJson(jsonReader, type);
             response.close();
-            if (baseResponse.isSuccess()){
+            int code = baseResponse.getCode();
+            if (code == 200) {
                 return (T) baseResponse;
+            } else if (code == 600) {
+                throw new IllegalStateException("操作失败");
+            } else if (code == 601) {
+                throw new IllegalStateException("注册失败");
+            } else if (code == 6011) {
+                throw new IllegalStateException("用户已存在");
+            } else if (code == 602) {
+                throw new IllegalStateException("登陆失败");
+            } else if (code == 6021) {
+                throw new IllegalStateException("用户邮箱不存在");
+            } else if (code == 6022) {
+                throw new IllegalStateException("用户密码错误");
+            } else if (code == 603) {
+                throw new IllegalStateException("user数据库操作失败");
+            } else if (code == 6031) {
+                throw new IllegalStateException("用户不存在");
+            } else if (code == 6032) {
+                throw new IllegalStateException("用户ID不存在");
+            } else if (code == 6033) {
+                throw new IllegalStateException("用户更新失败");
+            } else if (code == 604) {
+                throw new IllegalStateException("room数据库操作失败");
+            } else if (code == 6041) {
+                throw new IllegalStateException("房间创建失败");
+            } else if (code == 6042) {
+                throw new IllegalStateException("房间更新失败");
+            } else if (code == 6043) {
+                throw new IllegalStateException("房间删除失败");
+            } else if (code == 6044) {
+                throw new IllegalStateException("不存在直播间");
+            } else if (code == 6045) {
+                throw new IllegalStateException("不存在特定类别直播间");
+            } else if (code == 6046) {
+                throw new IllegalStateException("房间不存在或查询失败");
+            } else if (code == 6047) {
+                throw new IllegalStateException("用户已存在房间");
+            } else {
+                throw new IllegalStateException(String.valueOf(baseResponse.getCode()));
             }
-            if (!baseResponse.isSuccess()){
-                throw new IllegalStateException(baseResponse.getError());
-            }
+
 
 //            int code = lzyResponse.code;
 //            //这里的0是以下意思
@@ -112,7 +149,8 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         } else {
             response.close();
             throw new IllegalStateException("基类错误无法解析!");
+
         }
-        return null;
+
     }
 }

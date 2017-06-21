@@ -16,7 +16,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/testhead" />
+            android:src="@drawable/default_head" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:id="@+id/drawer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Magicwo"
+                android:text=""
                 android:textColor="@color/textColorBlack"
                 android:textSize="18dp" />
 
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="地下城与勇士：沃势如暴雨"
+                android:text=""
                 android:textColor="@color/textColorHint"
                 android:textSize="12dp" />
         </LinearLayout>
@@ -61,7 +61,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="17dp"
             android:paddingRight="17dp"
-            android:text="直播"
+            android:text="我要直播！！！"
             android:textColor="@color/textColorBlack"
             android:textSize="16dp"
 
@@ -79,7 +79,8 @@
             android:paddingRight="17dp"
             android:text="我的积分"
             android:textColor="@color/textColorBlack"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/drawer_setting_tv"
@@ -93,7 +94,8 @@
             android:paddingRight="17dp"
             android:text="设置"
             android:textColor="@color/textColorBlack"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/drawer_recommended_tv"
@@ -107,7 +109,8 @@
             android:paddingRight="17dp"
             android:text="应用推荐"
             android:textColor="@color/textColorBlack"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:visibility="gone" />
 
     </LinearLayout>
 </LinearLayout>

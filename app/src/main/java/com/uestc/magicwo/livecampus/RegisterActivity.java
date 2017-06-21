@@ -8,14 +8,32 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpHeaders;
+import com.uestc.magicwo.livecampus.appbase.AppBaseActivity;
+import com.uestc.magicwo.livecampus.net.BaseResponse;
+import com.uestc.magicwo.livecampus.net.JsonCallback;
+import com.uestc.magicwo.livecampus.net.SimpleResponse;
+import com.uestc.magicwo.livecampus.net.Urls;
 
-public class RegisterActivity extends AppCompatActivity {
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import okhttp3.Call;
+import okhttp3.Response;
+
+
+public class RegisterActivity extends AppBaseActivity {
     private EditText mAccount;                        //用户名编辑
     private EditText mPwd;                            //密码编辑
     private EditText mPwdCheck;                       //密码编辑
     private Button mSureButton;                       //确定按钮
     private Button mCancelButton;                     //取消按钮
     private UserDataManager mUserDataManager;         //用户数据管理类
+
+    private String userName;//记录用户名
+    private String userPwd;//记录密码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
     }
+
     View.OnClickListener m_register_Listener = new View.OnClickListener() {    //不同按钮按下的监听事件选择
         public void onClick(View v) {
             switch (v.getId()) {
@@ -44,43 +63,111 @@ public class RegisterActivity extends AppCompatActivity {
                     register_check();
                     break;
                 case R.id.register_btn_cancel:                     //取消按钮的监听事件,由注册界面返回登录界面
-                    Intent intent_Register_to_Login = new Intent(RegisterActivity.this,LoginActivity.class) ;    //切换User Activity至Login Activity
+                    Intent intent_Register_to_Login = new Intent(RegisterActivity.this, LoginActivity.class);    //切换User Activity至Login Activity
                     startActivity(intent_Register_to_Login);
                     finish();
                     break;
             }
         }
     };
+
     public void register_check() {                                //确认按钮的监听事件
         if (isUserNameAndPwdValid()) {
-            String userName = mAccount.getText().toString().trim();
-            String userPwd = mPwd.getText().toString().trim();
+            userName = mAccount.getText().toString().trim();
+            userPwd = mPwd.getText().toString().trim();
             String userPwdCheck = mPwdCheck.getText().toString().trim();
             //检查用户是否存在
-            int count=mUserDataManager.findUserByName(userName);
+//            int count = mUserDataManager.findUserByName(userName);
             //用户已经存在时返回，给出提示文字
-            if(count>0){
-                Toast.makeText(this, getString(R.string.name_already_exist, userName),Toast.LENGTH_SHORT).show();
-                return ;
-            }
-            if(userPwd.equals(userPwdCheck)==false){     //两次密码输入不一样
-                Toast.makeText(this, getString(R.string.pwd_not_the_same),Toast.LENGTH_SHORT).show();
-                return ;
+//            if (count > 0) {
+//                Toast.makeText(this, getString(R.string.name_already_exist, userName), Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+            if (userPwd.equals(userPwdCheck) == false) {     //两次密码输入不一样
+                Toast.makeText(this, getString(R.string.pwd_not_the_same), Toast.LENGTH_SHORT).show();
+                return;
             } else {
-                UserData mUser = new UserData(userName, userPwd);
-                mUserDataManager.openDataBase();
-                long flag = mUserDataManager.insertUserData(mUser); //新建用户信息
-                if (flag == -1) {
-                    Toast.makeText(this, getString(R.string.register_fail),Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this, getString(R.string.register_success),Toast.LENGTH_SHORT).show();
-                    Intent intent_Register_to_Login = new Intent(RegisterActivity.this,LoginActivity.class) ;    //切换User Activity至Login Activity
-                    startActivity(intent_Register_to_Login);
-                    finish();
-                }
+//                UserData mUser = new UserData(userName, userPwd);
+//                mUserDataManager.openDataBase();
+//                long flag = mUserDataManager.insertUserData(mUser); //新建用户信息
+//                if (flag == -1) {
+//                    Toast.makeText(this, getString(R.string.register_fail), Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_SHORT).show();
+//                    Intent intent_Register_to_Login = new Intent(RegisterActivity.this, LoginActivity.class);    //切换User Activity至Login Activity
+//                    startActivity(intent_Register_to_Login);
+//                    finish();
+//                }
+                register();
             }
         }
     }
+
+    /**
+     * 注册
+     */
+    private void register() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("username", userName);
+        params.put("password", userPwd);
+        JSONObject jsonObject = new JSONObject(params);
+        OkGo.post(Urls.SIGN)
+                .tag(this)
+                .upJson(jsonObject)
+                .execute(new JsonCallback<BaseResponse<SimpleResponse>>() {
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        showToast(e.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(BaseResponse<SimpleResponse> simpleResponseBaseResponse, Call call, Response response) {
+                        showToast("注册成功");
+                        login();
+
+                    }
+                });
+
+
+    }
+
+    /**
+     * 注册完直接登陆
+     */
+    private void login() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("username", userName);
+        params.put("password", userPwd);
+        JSONObject jsonObject = new JSONObject(params);
+        OkGo.post(Urls.LOGIN)
+                .tag(this)
+                .upJson(jsonObject)
+                .execute(new JsonCallback<BaseResponse<SimpleResponse>>() {
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        showToast(e.getMessage());
+                    }
+
+                    @Override
+                    public void onSuccess(BaseResponse<SimpleResponse> simpleResponseBaseResponse, Call call, Response response) {
+                        showToast("登陆成功");
+                        if (simpleResponseBaseResponse.getToken() != null && !simpleResponseBaseResponse.getToken().equals("")) {
+                            BaseApplication.saveUserInfo(simpleResponseBaseResponse.getToken(), simpleResponseBaseResponse.getUid(), userName, userPwd);
+                            HttpHeaders headers = new HttpHeaders();
+                            headers.put("authorization", BaseApplication.token);
+                            OkGo.getInstance().addCommonHeaders(headers);
+                            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+                            RegisterActivity.this.finish();
+
+
+                        }
+                    }
+                });
+
+    }
+
     public boolean isUserNameAndPwdValid() {
         if (mAccount.getText().toString().trim().equals("")) {
             Toast.makeText(this, getString(R.string.account_empty),
@@ -90,7 +177,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.pwd_empty),
                     Toast.LENGTH_SHORT).show();
             return false;
-        }else if(mPwdCheck.getText().toString().trim().equals("")) {
+        } else if (mPwdCheck.getText().toString().trim().equals("")) {
             Toast.makeText(this, getString(R.string.pwd_check_empty),
                     Toast.LENGTH_SHORT).show();
             return false;

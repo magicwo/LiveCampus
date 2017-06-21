@@ -1,6 +1,7 @@
 package com.uestc.magicwo.livecampus;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.lzy.okgo.OkGo;
@@ -8,6 +9,8 @@ import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
+import com.magicwo.com.magiclib.constant.DataSaveConstant;
+import com.uestc.magicwo.livecampus.sp.SharedPreferencesHelper;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -26,9 +29,18 @@ public class BaseApplication extends Application {
     public static String decodeType = "software";  //解码类型，默认软件解码
     public static String mediaType = "livestream";//媒体类型，默认网络直播
 
+    public static SharedPreferences sharedPreferences;
+    public static SharedPreferencesHelper sharedPreferencesHelper;
+    public static String userId = "";
+    public static String nickName = "";
+    public static String headUrl = "";
+    public static String token = "";
+    public static String pwd = "";
+
     @Override
     public void onCreate() {
         super.onCreate();
+        setupSharedPreferences();
 
         setOkGo();//网络请求库的初始化
 //
@@ -149,5 +161,32 @@ public class BaseApplication extends Application {
         }
     }
 
+    /**
+     * 初始化SharedPreferences
+     */
+    private void setupSharedPreferences() {
+        //MODE_PRIVATE 表示只有当前的应用程序才可以对这个SharedPreferences文件进行读写
+        sharedPreferences = getSharedPreferences(DataSaveConstant.SP_NAME, MODE_PRIVATE);
+        sharedPreferencesHelper = SharedPreferencesHelper.getSharedPreferencesHelperInstance(this);
+        userId = sharedPreferencesHelper.getString(DataSaveConstant.USERID);
+        headUrl = sharedPreferencesHelper.getString(DataSaveConstant.HEADURL);
+        nickName = sharedPreferencesHelper.getString(DataSaveConstant.NICKNAME);
+        token = sharedPreferencesHelper.getString(DataSaveConstant.TOKEN);
+        pwd = sharedPreferencesHelper.getString(DataSaveConstant.PWD);
+
+    }
+
+    //存储用户信息
+    public static void saveUserInfo(String token, String userId, String userName, String pwd) {
+        BaseApplication.token = token;
+        BaseApplication.userId = userId;
+        BaseApplication.nickName = userName;
+        BaseApplication.pwd = pwd;
+        sharedPreferencesHelper.saveString(DataSaveConstant.TOKEN, token);
+        sharedPreferencesHelper.saveString(DataSaveConstant.USERID, userId);
+        sharedPreferencesHelper.saveString(DataSaveConstant.NICKNAME, userName);
+        sharedPreferencesHelper.saveString(DataSaveConstant.PWD, pwd);
+
+    }
 
 }
