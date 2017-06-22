@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.liji.circleimageview.CircleImageView;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.request.BaseRequest;
 import com.uestc.magicwo.livecampus.BaseApplication;
 import com.uestc.magicwo.livecampus.LoginActivity;
 import com.uestc.magicwo.livecampus.R;
@@ -21,6 +22,7 @@ import com.uestc.magicwo.livecampus.net.JsonUploadCallback;
 import com.uestc.magicwo.livecampus.net.SimpleResponse;
 import com.uestc.magicwo.livecampus.net.Urls;
 import com.uestc.magicwo.livecampus.videostreaming.CameraPreviewActivity;
+import com.uestc.magicwo.livecampus.videostreaming.PrepareLiveActivity;
 import com.uestc.magicwo.livecampus.videostreaming.PublishParam;
 
 import org.json.JSONObject;
@@ -63,7 +65,6 @@ public class DrawerFragment extends AppBaseFragment {
             @Override
             public void onClick(View v) {
 
-
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
 
@@ -73,6 +74,12 @@ public class DrawerFragment extends AppBaseFragment {
         drawerLiveTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (BaseApplication.userId == null || BaseApplication.userId.equals("")) {
+                    Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                    return;
+                }
 //                String mUrlMedia = "rtmp://p4622ebf4.live.126.net/live/eb54c7f13acc4de3b269a80df9ff76f2?wsSecret=13d710866cbff6ef72e01f071c5d626f&wsTime=1497339630";
 //                Intent intent = new Intent(getActivity(), MediaPreviewActivity.class);
 //                intent.putExtra("mediaPath", mUrlMedia);
@@ -116,16 +123,26 @@ public class DrawerFragment extends AppBaseFragment {
 
                 publishParam.zoomed = false;
 
+                if (BaseApplication.nickName.equals("alice")) {
+                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/0209abf2449a4fe5ba9fafa90298f4e5?wsSecret=e3af3010487005961fe933cd01b230c8&wsTime=1498148950";
+                } else if (BaseApplication.nickName.equals("bob")) {
+                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/29528fa6d9714d12b4edab590efd51c0?wsSecret=5de3c1e118e2e8f33888c5e535c72f61&wsTime=1498149046";
 
-                publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/eb54c7f13acc4de3b269a80df9ff76f2?wsSecret=13d710866cbff6ef72e01f071c5d626f&wsTime=1497339630";
+                } else if (BaseApplication.nickName.equals("root")) {
+                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/1c33a2fbfac74978b10caa7e9ef250f5?wsSecret=3a66174b01a3471a698dcfe560969b7c&wsTime=1498149062";
+
+                } else {
+                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/eb54c7f13acc4de3b269a80df9ff76f2?wsSecret=13d710866cbff6ef72e01f071c5d626f&wsTime=1497339630";
+                }
                 publishParam.bitrate = 600;//码率
                 publishParam.fps = 20;//帧率
 //
-                getRoom(BaseApplication.userId);
+//                getRoom(BaseApplication.userId);
+//                createRoom(BaseApplication.userId);
 
-//                Intent intent = new Intent(getActivity(), CameraPreviewActivity.class);
-//                intent.putExtra("data", publishParam);
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), PrepareLiveActivity.class);
+                intent.putExtra("push_url", publishParam.pushUrl);
+                startActivity(intent);
 
             }
         });
@@ -151,7 +168,10 @@ public class DrawerFragment extends AppBaseFragment {
 
                     @Override
                     public void onSuccess(BaseResponse<RoomInfoResponse> roomInfoResponseBaseResponse, Call call, Response response) {
-                        Log.e("-----------直播间信息", roomInfoResponseBaseResponse.getRet().getRtmpPullUrl());
+                        Log.e("-----------直播间信息", roomInfoResponseBaseResponse.getRet().getPushUrl());
+                        Intent intent = new Intent(getActivity(), PrepareLiveActivity.class);
+                        intent.putExtra("push_url", roomInfoResponseBaseResponse.getRet().getPushUrl());
+                        startActivity(intent);
                     }
                 });
 
@@ -161,11 +181,26 @@ public class DrawerFragment extends AppBaseFragment {
         HashMap<String, String> params = new HashMap<>();
         params.put("uid", uid);
         params.put("title", BaseApplication.nickName);
-        params.put("category", "直播");
-        params.put("description", "我是描述");
+        params.put("category", "zhibo");
+//        params.put("room_cover", "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498155090963&di=da346ad65f4f125d9d2976c2829243aa&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fa%2F568cd27741af5.jpg");
+        params.put("description", "uestc");
         JSONObject jsonObject = new JSONObject(params);
         OkGo.post(Urls.CREATEROOMS).tag(this).upJson(jsonObject)
-                .execute(new JsonUploadCallback<BaseResponse<SimpleResponse>>() {
+                .execute(new JsonCallback<BaseResponse<SimpleResponse>>() {
+                    @Override
+                    public void onBefore(BaseRequest request) {
+                        super.onBefore(request);
+                        Toast.makeText(getActivity(), "正在创建房间", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+
                     @Override
                     public void onSuccess(BaseResponse<SimpleResponse> simpleResponseBaseResponse, Call call, Response response) {
                         getRoom(uid);

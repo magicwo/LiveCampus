@@ -335,7 +335,7 @@ public class NEMediaController extends FrameLayout {
 
         if (timeout != 0) {
             mHandler.removeMessages(FADE_OUT);
-            mHandler.sendMessageDelayed(mHandler.obtainMessage(FADE_OUT), timeout);
+           mHandler.sendMessageDelayed(mHandler.obtainMessage(FADE_OUT), timeout);
         }
     }
 

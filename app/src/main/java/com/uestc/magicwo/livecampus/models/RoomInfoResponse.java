@@ -2,6 +2,7 @@ package com.uestc.magicwo.livecampus.models;
 
 /**
  * Created by Magicwo on 2017/6/21.
+ * 房间信息，带拉流和推流地址
  */
 
 public class RoomInfoResponse {

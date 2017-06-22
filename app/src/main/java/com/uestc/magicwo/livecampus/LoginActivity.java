@@ -15,10 +15,12 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpHeaders;
 import com.magicwo.com.magiclib.base.BaseActivity;
 import com.magicwo.com.magiclib.constant.DataSaveConstant;
+import com.uestc.magicwo.livecampus.appbase.AppBaseActivity;
 import com.uestc.magicwo.livecampus.net.BaseResponse;
 import com.uestc.magicwo.livecampus.net.JsonCallback;
 import com.uestc.magicwo.livecampus.net.SimpleResponse;
 import com.uestc.magicwo.livecampus.net.Urls;
+import com.uestc.magicwo.livecampus.utils.ActivityManagement;
 
 import org.json.JSONObject;
 
@@ -27,7 +29,7 @@ import java.util.HashMap;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class LoginActivity extends BaseActivity {                 //登录界面活动
+public class LoginActivity extends AppBaseActivity {                 //登录界面活动
 
     public int pwdresetFlag = 0;
     private EditText mAccount;                        //用户名编辑
@@ -96,20 +98,6 @@ public class LoginActivity extends BaseActivity {                 //登录界面
         }
     }
 
-    @Override
-    protected void initVariables() {
-
-    }
-
-    @Override
-    protected void initView(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    protected void loadData() {
-
-    }
 
     View.OnClickListener mListener = new View.OnClickListener() {                  //不同按钮按下的监听事件选择
         public void onClick(View v) {
@@ -128,7 +116,6 @@ public class LoginActivity extends BaseActivity {                 //登录界面
                 case R.id.login_text_change_pwd:                             //登录界面的注销按钮
                     Intent intent_Login_to_reset = new Intent(LoginActivity.this, ResetpwdActivity.class);    //切换Login Activity至User Activity
                     startActivity(intent_Login_to_reset);
-                    finish();
                     break;
             }
         }
@@ -242,10 +229,10 @@ public class LoginActivity extends BaseActivity {                 //登录界面
                         if (simpleResponseBaseResponse.getToken() != null && !simpleResponseBaseResponse.getToken().equals("")) {
                             BaseApplication.saveUserInfo(simpleResponseBaseResponse.getToken(), simpleResponseBaseResponse.getUid(), userName, userPwd);
                             HttpHeaders headers = new HttpHeaders();
-                            headers.put("authorization", BaseApplication.token);
+                            headers.put("Authorization", "Bearer " + BaseApplication.token);
                             OkGo.getInstance().addCommonHeaders(headers);
                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                            LoginActivity.this.finish();
+                            ActivityManagement.getActivityManagement().finishAllActivity();
 
 
                         }

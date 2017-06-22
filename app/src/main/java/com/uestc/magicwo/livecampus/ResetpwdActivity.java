@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.uestc.magicwo.livecampus.appbase.AppBaseActivity;
 
-public class ResetpwdActivity extends AppCompatActivity {
+
+public class ResetpwdActivity extends AppBaseActivity {
     private EditText mAccount;                        //用户名编辑
     private EditText mPwd_old;                            //密码编辑
     private EditText mPwd_new;                            //密码编辑

@@ -10,6 +10,7 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
 import com.magicwo.com.magiclib.constant.DataSaveConstant;
+import com.pgyersdk.crash.PgyCrashManager;
 import com.uestc.magicwo.livecampus.sp.SharedPreferencesHelper;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -40,6 +41,7 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        PgyCrashManager.register(this);
         setupSharedPreferences();
 
         setOkGo();//网络请求库的初始化

@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import com.magicwo.com.magiclib.base.BaseActivity;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+import com.uestc.magicwo.livecampus.appbase.AppBaseActivity;
 import com.uestc.magicwo.livecampus.custom.CustomViewPager;
 import com.uestc.magicwo.livecampus.index.IndexFragment;
 import com.uestc.magicwo.livecampus.live.LiveFragment;
@@ -33,7 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class HomeActivity extends BaseActivity implements OnTabSelectListener, ViewPager.OnPageChangeListener, IndexFragment.OnStartDrawerListener {
+public class HomeActivity extends AppBaseActivity implements OnTabSelectListener, ViewPager.OnPageChangeListener, IndexFragment.OnStartDrawerListener {
 
 
     private static final int INDEX = 0;
@@ -71,6 +72,9 @@ public class HomeActivity extends BaseActivity implements OnTabSelectListener, V
             }
             if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.CAMERA)) {
                 permissions.add(Manifest.permission.CAMERA);
+            }
+            if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.RECORD_AUDIO)) {
+                permissions.add(Manifest.permission.RECORD_AUDIO);
             }
             if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.READ_PHONE_STATE)) {
                 permissions.add(Manifest.permission.READ_PHONE_STATE);

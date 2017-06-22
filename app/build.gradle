@@ -11,8 +11,8 @@ android {
         applicationId "com.uestc.magicwo.livecampus"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -54,4 +54,5 @@ dependencies {
     compile 'com.github.ctiao:ndkbitmap-x86:0.8.3'
     //b站弹幕显示框架
     compile files('libs/yunba-sdk-release1.8.5.jar')
+    compile files('libs/pgyer_sdk_2.5.6.jar')
 }

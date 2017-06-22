@@ -15,6 +15,7 @@ import com.uestc.magicwo.livecampus.net.BaseResponse;
 import com.uestc.magicwo.livecampus.net.JsonCallback;
 import com.uestc.magicwo.livecampus.net.SimpleResponse;
 import com.uestc.magicwo.livecampus.net.Urls;
+import com.uestc.magicwo.livecampus.utils.ActivityManagement;
 
 import org.json.JSONObject;
 
@@ -49,10 +50,7 @@ public class RegisterActivity extends AppBaseActivity {
         mSureButton.setOnClickListener(m_register_Listener);      //注册界面两个按钮的监听事件
         mCancelButton.setOnClickListener(m_register_Listener);
 
-        if (mUserDataManager == null) {
-            mUserDataManager = new UserDataManager(this);
-            mUserDataManager.openDataBase();                              //建立本地数据库
-        }
+//
 
     }
 
@@ -63,8 +61,6 @@ public class RegisterActivity extends AppBaseActivity {
                     register_check();
                     break;
                 case R.id.register_btn_cancel:                     //取消按钮的监听事件,由注册界面返回登录界面
-                    Intent intent_Register_to_Login = new Intent(RegisterActivity.this, LoginActivity.class);    //切换User Activity至Login Activity
-                    startActivity(intent_Register_to_Login);
                     finish();
                     break;
             }
@@ -158,8 +154,9 @@ public class RegisterActivity extends AppBaseActivity {
                             HttpHeaders headers = new HttpHeaders();
                             headers.put("authorization", BaseApplication.token);
                             OkGo.getInstance().addCommonHeaders(headers);
+
                             startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-                            RegisterActivity.this.finish();
+                            ActivityManagement.getActivityManagement().finishAllActivity();
 
 
                         }

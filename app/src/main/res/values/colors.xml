@@ -82,7 +82,7 @@
     <!-- 蓝色 -->
 
 
-    <color name="title_grey">#CED9E7</color>
+    <color name="title_grey">#ffffff</color>
 
     <color name="light_blue">#8CA4FF</color>
     <color name="text_color_count">#F6BB42</color>
@@ -106,4 +106,6 @@
     <color name="edit_text_color">#ABAABF</color>
     <color name="release_layout_bgcolor">#EDEDF3</color>
     <color name="live_chat">#F6BB42</color>
+    <color name="button_cancel_bg">#a4a4a4</color>
+
 </resources>

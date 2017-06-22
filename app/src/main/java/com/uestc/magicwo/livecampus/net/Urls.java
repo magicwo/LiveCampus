@@ -23,6 +23,10 @@ public class Urls {
      * 创建房间
      */
     public static final String CREATEROOMS = SERVER + "/room/create";
+    /**
+     * 获取房间列表
+     */
+    public static final String ROOMLIST = SERVER + "/room/roomlist";
 
 
 }

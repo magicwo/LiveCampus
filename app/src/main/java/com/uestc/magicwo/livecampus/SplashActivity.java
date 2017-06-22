@@ -64,7 +64,7 @@ public class SplashActivity extends AppBaseActivity {
                             BaseApplication.token = simpleResponseBaseResponse.getToken();
                             BaseApplication.sharedPreferencesHelper.saveString(DataSaveConstant.TOKEN, BaseApplication.token);
                             HttpHeaders headers = new HttpHeaders();
-                            headers.put("authorization", BaseApplication.token);
+                            headers.put("Authorization", "Bearer " + BaseApplication.token);
                             OkGo.getInstance().addCommonHeaders(headers);
                             startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                             SplashActivity.this.finish();

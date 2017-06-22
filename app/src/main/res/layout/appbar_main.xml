@@ -41,7 +41,7 @@
             android:id="@+id/head_image_view"
             android:layout_width="30dp"
             android:layout_height="match_parent"
-            android:src="@drawable/testhead" />
+            android:src="@drawable/default_head" />
     </LinearLayout>
 
 

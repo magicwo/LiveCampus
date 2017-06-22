@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/main_push_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:textIsSelectable="true" />
+
+            <TextView
+                style="@style/text_title_small"
+                android:background="@color/title_grey"
+                android:text="参数设置" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="7dp">
+
+                <TextView
+                    style="@style/text_content"
+                    android:text="码率" />
+
+                <EditText
+                    android:id="@+id/main_bitrate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="600" />
+            </LinearLayout>
+
+            <View style="@style/view_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="7dp">
+
+                <TextView
+                    style="@style/text_content"
+                    android:text="帧率" />
+
+                <EditText
+                    android:id="@+id/main_fps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="20" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/text_title_small"
+                android:background="@color/title_grey"
+                android:text="清晰度选择" />
+
+            <RadioGroup
+                android:id="@+id/main_radiogroup_resolution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <RadioButton
+                    android:id="@+id/main_resolution_high"
+                    style="@style/radio_button"
+                    android:text="高清" />
+
+                <RadioButton
+                    android:id="@+id/main_resolution_stand"
+                    style="@style/radio_button"
+                    android:checked="true"
+                    android:text="标清" />
+
+                <RadioButton
+                    android:id="@+id/main_resolution_low"
+                    style="@style/radio_button"
+                    android:text="流畅" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/main_focus"
+                style="@style/text_title_radio"
+                android:drawableRight="@drawable/switch_off"
+                android:tag="false"
+                android:text="开启变焦功能" />
+
+            <TextView
+                android:id="@+id/main_use_filter"
+                style="@style/text_title_radio"
+                android:drawableRight="@drawable/switch_off"
+                android:tag="false"
+                android:text="使用滤镜" />
+
+            <RadioGroup
+                android:id="@+id/main_filter_radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <RadioButton
+                    android:id="@+id/main_filter_noraml"
+                    style="@style/radio_button"
+                    android:text="普通" />
+
+                <RadioButton
+                    android:id="@+id/main_filter_beautiful"
+                    style="@style/radio_button"
+                    android:checked="true"
+                    android:text="美颜" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/main_water"
+                style="@style/text_title_radio"
+                android:tag="false"
+                android:text="添加水印" />
+
+            <TextView
+                android:id="@+id/main_flash"
+                style="@style/text_title_radio"
+                android:tag="false"
+                android:text="闪光灯开启" />
+
+            <TextView
+                android:id="@+id/main_qos"
+                style="@style/text_title_radio"
+                android:tag="true"
+                android:text="开启Qos功能" />
+
+            <TextView
+                android:id="@+id/main_graffiti"
+                style="@style/text_title_radio"
+                android:tag="false"
+                android:text="打开涂鸦" />
+
+            <Button
+                android:id="@+id/main_start"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:background="@drawable/select_button_confirm"
+                android:text="进入直播"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 
 import com.magicwo.com.magiclib.BroadcastReceiver.ConnectionChangeReceiver;
 import com.magicwo.com.magiclib.base.BaseActivity;
+import com.pgyersdk.activity.FeedbackActivity;
+import com.pgyersdk.feedback.PgyFeedbackShakeManager;
 import com.uestc.magicwo.livecampus.utils.ActivityManagement;
 
 
@@ -24,6 +26,12 @@ public class AppBaseActivity extends BaseActivity {
     @Override
     protected void initVariables() {
 //        ActivityManagement.getActivityManagement();
+
+
+    }
+
+    @Override
+    protected void initView(Bundle savedInstanceState) {
         activityManagement = ActivityManagement.getActivityManagement();
         activityManagement.addActivity(this);
         //注册网络状态的监听
@@ -31,12 +39,6 @@ public class AppBaseActivity extends BaseActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(mNetworkStateReceiver, filter);
-
-    }
-
-    @Override
-    protected void initView(Bundle savedInstanceState) {
-
     }
 
     @Override
@@ -85,12 +87,22 @@ public class AppBaseActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // 自定义摇一摇的灵敏度，默认为950，数值越小灵敏度越高。
+        PgyFeedbackShakeManager.setShakingThreshold(900);
+
+        // 以对话框的形式弹出
+        // PgyFeedbackShakeManager.register(this);
+        // 以Activity的形式打开，这种情况下必须在AndroidManifest.xml配置FeedbackActivity
+        // 打开沉浸式,默认为false
+        FeedbackActivity.setBarImmersive(true);
+        PgyFeedbackShakeManager.register(this, false);
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        PgyFeedbackShakeManager.unregister();
 
     }
 }

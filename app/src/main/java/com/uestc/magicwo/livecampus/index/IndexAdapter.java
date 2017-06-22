@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.uestc.magicwo.livecampus.R;
+import com.uestc.magicwo.livecampus.models.RoomBaseInfoResponse;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final int TYPE_HEADER = 2;//头部
 
 
-    private List<IndexResponse> datas;
+    private List<RoomBaseInfoResponse> datas;
     private Context context;
     private int mLoadMoreStatus = PULLUP_LOAD_MORE;
 
@@ -44,7 +45,7 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private boolean ifEmptyView = false;
 
 
-    public IndexAdapter(Context context, List<IndexResponse> datas) {
+    public IndexAdapter(Context context, List<RoomBaseInfoResponse> datas) {
         this.context = context;
         this.datas = datas;
     }
@@ -81,18 +82,22 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (getItemViewType(position) == TYPE_HEADER) return;
         if (holder instanceof ItemViewHolder) {
             final int pos = getRealPosition(holder);
-            final IndexResponse data = datas.get(pos);
+            final RoomBaseInfoResponse data = datas.get(pos);
             if (data != null) {
-                ((ItemViewHolder) holder).contentTextView.setText(data.getTitle());
-                ((ItemViewHolder) holder).audienceTextView.setText(String.valueOf(data.getAudience_num()));
-                Glide.with(context).load(data.getImageUrl()).into(((ItemViewHolder) holder).imageView);
-                ((ItemViewHolder) holder).nickNameTextView.setText(data.getNickname());
+                ((ItemViewHolder) holder).contentTextView.setText(data.getDescription());
+//                ((ItemViewHolder) holder).audienceTextView.setText(String.valueOf(data.getAudience_num()));
+                if (data.getCover() == null || data.getCover().equals("")) {
+                    Glide.with(context).load("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498155090964&di=f332a920017af3b784245f5d2bd6c9d5&imgtype=0&src=http%3A%2F%2Fimgstore.cdn.sogou.com%2Fapp%2Fa%2F100540002%2F481521.jpg").into(((ItemViewHolder) holder).imageView);
+                } else {
+                    Glide.with(context).load(data.getCover()).into(((ItemViewHolder) holder).imageView);
+                }
+                ((ItemViewHolder) holder).nickNameTextView.setText(data.getUsername());
             }
             if (mListener == null) return;
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mListener.onItemClick(pos, data.getuId(), data.getVideoUrl());
+                    mListener.onItemClick(pos, data.getRid());
                 }
             });
 
@@ -200,12 +205,12 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public void AddHeaderItem(List<IndexResponse> items) {
+    public void AddHeaderItem(List<RoomBaseInfoResponse> items) {
         datas.addAll(0, items);
         notifyDataSetChanged();
     }
 
-    public void AddFooterItem(List<IndexResponse> items) {
+    public void AddFooterItem(List<RoomBaseInfoResponse> items) {
         datas.addAll(items);
         notifyDataSetChanged();
     }
@@ -234,6 +239,6 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position, String data, String url);
+        void onItemClick(int position, String data);
     }
 }

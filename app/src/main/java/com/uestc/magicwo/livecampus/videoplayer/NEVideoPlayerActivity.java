@@ -9,12 +9,18 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +77,11 @@ public class NEVideoPlayerActivity extends Activity {
     private boolean pauseInBackgroud = false;
 
     private RelativeLayout mPlayToolbar;
+    private LinearLayout sendTextLayout;
+    private EditText editText;
+    private Button buttonConfirm;
+    private String rid;
+
     NEMediaPlayer mMediaPlayer = new NEMediaPlayer();
 
     //弹幕相关
@@ -93,13 +104,14 @@ public class NEVideoPlayerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
         ButterKnife.bind(this);
-
-        initDanmakus();//初始化弹幕相关
-        registerReceiver();
         //接收MainActivity传过来的参数
         mMediaType = getIntent().getStringExtra("media_type");
         mDecodeType = getIntent().getStringExtra("decode_type");
         mVideoPath = getIntent().getStringExtra("videoPath");
+        rid = getIntent().getStringExtra("Rid");
+
+        initDanmakus();//初始化弹幕相关
+        registerReceiver();
 
         Intent intent = getIntent();
         String intentAction = intent.getAction();
@@ -124,7 +136,49 @@ public class NEVideoPlayerActivity extends Activity {
         }
 
         mPlayToolbar = (RelativeLayout) findViewById(R.id.play_toolbar);
+        sendTextLayout = (LinearLayout) findViewById(R.id.comment_layout);
+        editText = (EditText) findViewById(R.id.editText);
+        buttonConfirm = (Button) findViewById(R.id.button_send);
+        View.OnFocusChangeListener mFocusChangedListener;
+        mFocusChangedListener = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+
+                }
+            }
+        };
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.e(this.toString(), "before");
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.e(this.toString(), "on");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.e(this.toString(), "after");
+                if (editText.getText().toString().length() <= 0) {
+                    buttonConfirm.setVisibility(View.INVISIBLE);
+                } else {
+                    buttonConfirm.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        buttonConfirm.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendText(editText.getText().toString());
+            }
+        });
+
         mPlayToolbar.setVisibility(View.INVISIBLE);
+        sendTextLayout.setVisibility(View.INVISIBLE);
 
         mLoadingView = findViewById(R.id.buffering_prompt);
         mMediaController = new NEMediaController(this);
@@ -149,12 +203,13 @@ public class NEVideoPlayerActivity extends Activity {
         mPlayBack.setOnClickListener(mOnClickEvent); //监听退出播放的事件响应
         mMediaController.setOnShownListener(mOnShowListener); //监听mediacontroller是否显示
         mMediaController.setOnHiddenListener(mOnHiddenListener); //监听mediacontroller是否隐藏
+        mMediaController.setFileName("直播");
     }
 
     private void registerReceiver() {
         //订阅topic
         YunBaManager.start(getApplicationContext());
-        YunBaManager.subscribe(getApplicationContext(), "wujinwo",
+        YunBaManager.subscribe(getApplicationContext(), rid,
                 new IMqttActionListener() {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {
@@ -179,6 +234,31 @@ public class NEVideoPlayerActivity extends Activity {
         registerReceiver(pushMessageReceiver, intentFilter);//注册广播监听
     }
 
+    private void sendText(final String text) {
+        YunBaManager.publish(getApplicationContext(), rid, text,
+                new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                        Log.e("-------------->", "发送弹幕成功");
+                        addDanmaku(text, true);
+
+                    }
+
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                        if (exception instanceof MqttException) {
+                            MqttException ex = (MqttException) exception;
+                            String msg = "publish failed with error code : " + ex.getReasonCode();
+                            Log.e("-------------->", msg);
+
+                        }
+                    }
+                }
+        );
+
+
+    }
+
     public class PushMessageReceiver extends BroadcastReceiver {
 
         @Override
@@ -189,7 +269,7 @@ public class NEVideoPlayerActivity extends Activity {
                 String topic = intent.getStringExtra(YunBaManager.MQTT_TOPIC);
                 String msg = intent.getStringExtra(YunBaManager.MQTT_MSG);
                 Log.e("-------------->", msg);
-                addDanmaku(msg, true);
+                addDanmaku(msg, false);
             }
 
         }
@@ -291,8 +371,12 @@ public class NEVideoPlayerActivity extends Activity {
         public void onShown() {
             mPlayToolbar.setVisibility(View.VISIBLE);
             mPlayToolbar.requestLayout();
+            sendTextLayout.setVisibility(View.VISIBLE);
+            sendTextLayout.requestLayout();
             mVideoView.invalidate();
             mPlayToolbar.postInvalidate();
+            sendTextLayout.postInvalidate();
+
         }
     };
 
@@ -301,6 +385,7 @@ public class NEVideoPlayerActivity extends Activity {
         @Override
         public void onHidden() {
             mPlayToolbar.setVisibility(View.INVISIBLE);
+//            sendTextLayout.setVisibility(View.INVISIBLE);
         }
     };
 
@@ -342,8 +427,9 @@ public class NEVideoPlayerActivity extends Activity {
             danmakuView.release();
             danmakuView = null;
         }
-        unregisterReceiver(pushMessageReceiver);
-        YunBaManager.unsubscribe(this, "wujinwo",
+        if (pushMessageReceiver != null)
+            unregisterReceiver(pushMessageReceiver);
+        YunBaManager.unsubscribe(this, rid,
                 new IMqttActionListener() {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {

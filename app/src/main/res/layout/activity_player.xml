@@ -15,6 +15,95 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <LinearLayout
+        android:id="@+id/buffering_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:text="@string/buffering"
+            android:textColor="#FFFFFFFF"
+            android:textSize="13dp" />
+
+        <ProgressBar
+            style="@android:style/Widget.ProgressBar.Large"
+            android:layout_width="50dip"
+            android:layout_height="50dip" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/comment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="40dip"
+        android:background="#00000000"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:id="@+id/comment_linea_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="发送弹幕..."
+                    android:maxLines="5"
+                    android:minHeight="18dp"
+                    android:text=""
+                    android:textColor="#313131"
+                    android:textColorHint="#88313131"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/hor_line_icon" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@null"
+            android:gravity="center"
+            android:text="发送"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/play_toolbar"
         android:layout_width="match_parent"
@@ -44,28 +133,5 @@
             android:maxWidth="200dip"
             android:singleLine="true" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/buffering_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:text="@string/buffering"
-            android:textColor="#FFFFFFFF"
-            android:textSize="13dp" />
-
-        <ProgressBar
-            style="@android:style/Widget.ProgressBar.Large"
-            android:layout_width="50dip"
-            android:layout_height="50dip" />
-    </LinearLayout>
 
 </FrameLayout>
