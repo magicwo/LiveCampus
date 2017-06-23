@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.media.AudioFormat;
@@ -36,7 +37,13 @@ import com.netease.LSMediaCapture.lsMediaCapture.LSLiveStreamingParaCtx;
 import com.netease.LSMediaCapture.lsMessageHandler;
 import com.netease.LSMediaCapture.view.NeteaseGLSurfaceView;
 import com.netease.LSMediaCapture.view.NeteaseSurfaceView;
+import com.uestc.magicwo.livecampus.BaseApplication;
 import com.uestc.magicwo.livecampus.R;
+import com.uestc.magicwo.livecampus.videoplayer.NEVideoPlayerActivity;
+
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,9 +53,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Semaphore;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.yunba.android.manager.YunBaManager;
 import jp.co.cyberagent.android.gpuimage.GPUImageFilter;
+import master.flame.danmaku.controller.DrawHandler;
+import master.flame.danmaku.danmaku.model.BaseDanmaku;
+import master.flame.danmaku.danmaku.model.DanmakuTimer;
+import master.flame.danmaku.danmaku.model.IDanmakus;
+import master.flame.danmaku.danmaku.model.android.DanmakuContext;
+import master.flame.danmaku.danmaku.model.android.Danmakus;
+import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
+import master.flame.danmaku.ui.widget.DanmakuView;
 
 
 //由于直播推流的URL地址较长，可以直接在代码中的mliveStreamingURL设置直播推流的URL
@@ -244,6 +263,22 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
     private BroadcastMsgReceiver broadcastMsgReceiver = new BroadcastMsgReceiver();
     private static final String TAG = "NeteaseLiveStream";
 
+    private String rid = "";
+
+    //弹幕相关
+    @BindView(R.id.danmaku_view)
+    DanmakuView danmakuView;
+    private boolean showDanmaku = true;//是否显示弹幕
+    private DanmakuContext danmakuContext;
+    private BaseDanmakuParser parser = new BaseDanmakuParser() {
+        @Override
+        protected IDanmakus parse() {
+            return new Danmakus();
+        }
+    };//弹幕解析器
+
+    private PushMessageReceiver2 pushMessageReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -332,6 +367,18 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
         mLSLiveStreamingParaCtx.sLSQoSParaCtx.qosType = (mPublishParam.qosEnable ? OpenQoS : CloseQoS);
 
         setContentView(R.layout.activity_livestreaming);
+        ButterKnife.bind(this);
+        if (BaseApplication.nickName.equals("alice")) {
+            rid = "1";
+        } else if (BaseApplication.nickName.equals("bob")) {
+            rid = "2";
+        } else if (BaseApplication.nickName.equals("root")) {
+            rid = "3";
+        } else {
+            rid = "4";
+        }
+        initDanmakus();//初始化弹幕相关
+        registerReceiver();
 
         //3、根据是否使用滤镜模式和推流方式（音视频或者音频或者视频）选择surfaceview类型
         if (mUseFilter && (mLSLiveStreamingParaCtx.eOutStreamType.outputStreamType == HAVE_AV || mLSLiveStreamingParaCtx.eOutStreamType.outputStreamType == HAVE_VIDEO)) {
@@ -457,6 +504,129 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
         layoutUp.setVisibility(View.GONE);
     }
 
+    //弹幕相关从此开始
+    private void initDanmakus() {
+        danmakuView.enableDanmakuDrawingCache(true);//设置缓存
+        danmakuView.setCallback(new DrawHandler.Callback() {
+            @Override
+            public void prepared() {
+                showDanmaku = true;
+                danmakuView.start();
+//                generateSomeDanmaku();
+            }
+
+            @Override
+            public void updateTimer(DanmakuTimer timer) {
+
+            }
+
+            @Override
+            public void danmakuShown(BaseDanmaku danmaku) {
+
+            }
+
+            @Override
+            public void drawingFinished() {
+
+            }
+        });
+        danmakuContext = DanmakuContext.create();
+        danmakuView.prepare(parser, danmakuContext);
+    }
+
+    /**
+     * 向弹幕View中添加一条弹幕
+     *
+     * @param content    弹幕的具体内容
+     * @param withBorder 弹幕是否有边框
+     */
+    private void addDanmaku(String content, boolean withBorder) {
+        BaseDanmaku danmaku = danmakuContext.mDanmakuFactory.createDanmaku(BaseDanmaku.TYPE_SCROLL_RL);
+        danmaku.text = content;
+        danmaku.padding = 5;
+        danmaku.textSize = sp2px(20);
+        danmaku.textColor = Color.WHITE;
+        danmaku.setTime(danmakuView.getCurrentTime());
+        if (withBorder) {
+            danmaku.borderColor = Color.GREEN;
+        }
+        danmakuView.addDanmaku(danmaku);
+    }
+
+    /**
+     * sp转px的方法。
+     */
+    public int sp2px(float spValue) {
+        final float fontScale = getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
+
+    /**
+     * 随机生成一些弹幕内容以供测试
+     */
+    private void generateSomeDanmaku() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (showDanmaku) {
+                    int time = new Random().nextInt(300);
+                    String content = "" + time + time;
+                    addDanmaku(content, false);
+                    try {
+                        Thread.sleep(time);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+    //弹幕相关到此结束
+
+    private void registerReceiver() {
+        //订阅topic
+        YunBaManager.start(getApplicationContext());
+        YunBaManager.subscribe(getApplicationContext(), rid,
+                new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                        Log.e("-------------->", "成功");
+                    }
+
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                        if (exception instanceof MqttException) {
+                            MqttException ex = (MqttException) exception;
+                            String msg = "Subscribe failed with error code : " + ex.getReasonCode();
+                            Log.e("-------------->", msg);
+                        }
+
+                    }
+                }
+        );
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("io.yunba.android.MESSAGE_RECEIVED_ACTION");
+        intentFilter.addCategory(getPackageName());
+        pushMessageReceiver = new PushMessageReceiver2();
+        registerReceiver(pushMessageReceiver, intentFilter);//注册广播监听
+    }
+
+    public class PushMessageReceiver2 extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            if (YunBaManager.MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+
+                String topic = intent.getStringExtra(YunBaManager.MQTT_TOPIC);
+                String msg = intent.getStringExtra(YunBaManager.MQTT_MSG);
+                Log.e("-------------->", msg);
+                addDanmaku(msg, false);
+            }
+
+        }
+    }
+
     @Override
     protected void onDestroy() {
 
@@ -516,6 +686,30 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
         if (m_liveStreamingOn) {
             m_liveStreamingOn = false;
         }
+        showDanmaku = false;
+        //释放弹幕资源
+        if (danmakuView != null) {
+            danmakuView.release();
+            danmakuView = null;
+        }
+        if (pushMessageReceiver != null)
+            unregisterReceiver(pushMessageReceiver);
+        YunBaManager.unsubscribe(this, rid,
+                new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                    }
+
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                        if (exception instanceof MqttException) {
+                            MqttException ex = (MqttException) exception;
+                            String msg = "Subscribe failed with error code : " + ex.getReasonCode();
+                        }
+
+                    }
+                }
+        );
 
         super.onDestroy();
     }
@@ -532,6 +726,10 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
                 }
             }
         }
+        //弹幕暂停
+        if (danmakuView != null && danmakuView.isPrepared()) {
+            danmakuView.pause();
+        }
         super.onPause();
     }
 
@@ -545,6 +743,10 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
                 //关闭推流静音帧
                 mLSMediaCapture.resumeAudioEncode();
             }
+        }
+        //弹幕恢复
+        if (danmakuView != null && danmakuView.isPrepared() && danmakuView.isPaused()) {
+            danmakuView.resume();
         }
     }
 
