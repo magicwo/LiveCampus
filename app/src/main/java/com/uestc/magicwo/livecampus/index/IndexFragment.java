@@ -100,47 +100,47 @@ public class IndexFragment extends AppBaseFragment {
     }
 
     private void getRoomUrl(String rid) {
-//        OkGo.get(Urls.ROOMINFO + "?id=" + rid + "&type=rid")
-//                .tag(this)
-//                .execute(new JsonCallback<BaseResponse<RoomInfoResponse>>() {
-//                    @Override
-//                    public void onBefore(BaseRequest request) {
-//                        super.onBefore(request);
-//                        Toast.makeText(getActivity(), "正在获取房间信息", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onError(Call call, Response response, Exception e) {
-//                        super.onError(call, response, e);
-//                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(BaseResponse<RoomInfoResponse> roomInfoResponseBaseResponse, Call call, Response response) {
-//                        Log.e("-----------直播间信息", roomInfoResponseBaseResponse.getRet().getRtmpPullUrl());
-//                        Intent intent = new Intent(getActivity(), NEVideoPlayerActivity.class);
-////                intent.putExtra("quId", quId);
-////                intent.putExtra("position", position);
-//                        intent.putExtra("media_type", BaseApplication.mediaType);
-//                        intent.putExtra("decode_type", BaseApplication.decodeType);
-//                        intent.putExtra("videoPath", roomInfoResponseBaseResponse.getRet().getRtmpPullUrl());
-//                        startActivity(intent);
-//                    }
-//                });
-        Intent intent = new Intent(getActivity(), NEVideoPlayerActivity.class);
-        intent.putExtra("media_type", BaseApplication.mediaType);
-        intent.putExtra("decode_type", BaseApplication.decodeType);
-        if (rid.equals("1")) {
-            intent.putExtra("videoPath", "rtmp://v4622ebf4.live.126.net/live/0209abf2449a4fe5ba9fafa90298f4e5");
-        }
-        if (rid.equals("2")) {
-            intent.putExtra("videoPath", "rtmp://v4622ebf4.live.126.net/live/29528fa6d9714d12b4edab590efd51c0");
-        }
-        if (rid.equals("3")) {
-            intent.putExtra("videoPath", "rtmp://v4622ebf4.live.126.net/live/1c33a2fbfac74978b10caa7e9ef250f5");
-        }
-        intent.putExtra("Rid", rid);
-        startActivity(intent);
+        OkGo.get(Urls.ROOMINFO + "?id=" + rid + "&type=rid")
+                .tag(this)
+                .execute(new JsonCallback<BaseResponse<RoomInfoResponse>>() {
+                    @Override
+                    public void onBefore(BaseRequest request) {
+                        super.onBefore(request);
+                        Toast.makeText(getActivity(), "正在获取房间信息", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(BaseResponse<RoomInfoResponse> roomInfoResponseBaseResponse, Call call, Response response) {
+                        Log.e("-----------直播间信息", roomInfoResponseBaseResponse.getRet().getRtmpPullUrl());
+                        Intent intent = new Intent(getActivity(), NEVideoPlayerActivity.class);
+//                intent.putExtra("quId", quId);
+//                intent.putExtra("position", position);
+                        intent.putExtra("media_type", BaseApplication.mediaType);
+                        intent.putExtra("decode_type", BaseApplication.decodeType);
+                        intent.putExtra("videoPath", roomInfoResponseBaseResponse.getRet().getRtmpPullUrl());
+                        startActivity(intent);
+                    }
+                });
+//        Intent intent = new Intent(getActivity(), NEVideoPlayerActivity.class);
+//        intent.putExtra("media_type", BaseApplication.mediaType);
+//        intent.putExtra("decode_type", BaseApplication.decodeType);
+//        if (rid.equals("1")) {
+//            intent.putExtra("videoPath", "rtmp://v4622ebf4.live.126.net/live/0209abf2449a4fe5ba9fafa90298f4e5");
+//        }
+//        if (rid.equals("2")) {
+//            intent.putExtra("videoPath", "rtmp://v4622ebf4.live.126.net/live/29528fa6d9714d12b4edab590efd51c0");
+//        }
+//        if (rid.equals("3")) {
+//            intent.putExtra("videoPath", "rtmp://v4622ebf4.live.126.net/live/1c33a2fbfac74978b10caa7e9ef250f5");
+//        }
+//        intent.putExtra("Rid", rid);
+//        startActivity(intent);
     }
 
     private void init_refresh() {
@@ -254,43 +254,43 @@ public class IndexFragment extends AppBaseFragment {
      * 获取房间
      */
     private void getRooms() {
-//        OkGo.get(Urls.ROOMLIST + "?records=" + 200 + "&pnum=" + 1)
-//                .tag(this)
-//                .execute(new JsonCallback<BaseResponse<RoomList>>() {
-//                    @Override
-//                    public void onError(Call call, Response response, Exception e) {
-//                        super.onError(call, response, e);
-//                        refreshLayout.setRefreshing(false);
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(BaseResponse<RoomList> roomListBaseResponse, Call call, Response response) {
-//                        datas.clear();
-//                        datas.addAll(roomListBaseResponse.getRet().getList());
-//                        indexAdapter.notifyDataSetChanged();
-//                        refreshLayout.setRefreshing(false);
-//                    }
-//                });
-        datas.clear();
-        RoomBaseInfoResponse roomBaseInfoResponse = new RoomBaseInfoResponse();
-        roomBaseInfoResponse.setDescription("Alice的直播间");
-        roomBaseInfoResponse.setUsername("Alice");
-        roomBaseInfoResponse.setRid("1");
-        roomBaseInfoResponse.setCover("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498160494473&di=33a7f471ec4f1758989fb8b22e8a7183&imgtype=0&src=http%3A%2F%2Ftupian.enterdesk.com%2F2013%2Fmxy%2F10%2F12%2F2%2F4.jpg");
-        datas.add(roomBaseInfoResponse);
-        RoomBaseInfoResponse roomBaseInfoResponse2 = new RoomBaseInfoResponse();
-        roomBaseInfoResponse2.setDescription("Bob的直播间");
-        roomBaseInfoResponse2.setUsername("Bob");
-        roomBaseInfoResponse2.setRid("2");
-        roomBaseInfoResponse2.setCover("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498160494471&di=30a5af615ee7ef76f93e69d63f7b43e1&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fa%2F568cd27741af5.jpg");
-        datas.add(roomBaseInfoResponse2);
-        RoomBaseInfoResponse roomBaseInfoResponse3 = new RoomBaseInfoResponse();
-        roomBaseInfoResponse3.setDescription("Root的直播间");
-        roomBaseInfoResponse3.setUsername("Root");
-        roomBaseInfoResponse3.setRid("3");
-        datas.add(roomBaseInfoResponse3);
-        indexAdapter.notifyDataSetChanged();
-        refreshLayout.setRefreshing(false);
+        OkGo.get(Urls.ROOMLIST + "?records=" + 200 + "&pnum=" + 1)
+                .tag(this)
+                .execute(new JsonCallback<BaseResponse<RoomList>>() {
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        refreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onSuccess(BaseResponse<RoomList> roomListBaseResponse, Call call, Response response) {
+                        datas.clear();
+                        datas.addAll(roomListBaseResponse.getRet().getList());
+                        indexAdapter.notifyDataSetChanged();
+                        refreshLayout.setRefreshing(false);
+                    }
+                });
+//        datas.clear();
+//        RoomBaseInfoResponse roomBaseInfoResponse = new RoomBaseInfoResponse();
+//        roomBaseInfoResponse.setDescription("Alice的直播间");
+//        roomBaseInfoResponse.setUsername("Alice");
+//        roomBaseInfoResponse.setRid("1");
+//        roomBaseInfoResponse.setCover("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498160494473&di=33a7f471ec4f1758989fb8b22e8a7183&imgtype=0&src=http%3A%2F%2Ftupian.enterdesk.com%2F2013%2Fmxy%2F10%2F12%2F2%2F4.jpg");
+//        datas.add(roomBaseInfoResponse);
+//        RoomBaseInfoResponse roomBaseInfoResponse2 = new RoomBaseInfoResponse();
+//        roomBaseInfoResponse2.setDescription("Bob的直播间");
+//        roomBaseInfoResponse2.setUsername("Bob");
+//        roomBaseInfoResponse2.setRid("2");
+//        roomBaseInfoResponse2.setCover("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498160494471&di=30a5af615ee7ef76f93e69d63f7b43e1&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fa%2F568cd27741af5.jpg");
+//        datas.add(roomBaseInfoResponse2);
+//        RoomBaseInfoResponse roomBaseInfoResponse3 = new RoomBaseInfoResponse();
+//        roomBaseInfoResponse3.setDescription("Root的直播间");
+//        roomBaseInfoResponse3.setUsername("Root");
+//        roomBaseInfoResponse3.setRid("3");
+//        datas.add(roomBaseInfoResponse3);
+//        indexAdapter.notifyDataSetChanged();
+//        refreshLayout.setRefreshing(false);
 
 
     }

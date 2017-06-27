@@ -106,43 +106,43 @@ public class DrawerFragment extends AppBaseFragment {
 
                 //以下为全新版的推流设置
                 PublishParam publishParam = new PublishParam();
-                publishParam.watermark = false;
-
-
-                publishParam.flashEnable = false;
-
-
-                publishParam.qosEnable = false;
-
-
-                publishParam.graffitiOn = false;
-
-
-                publishParam.useFilter = false;
-
-
-                publishParam.zoomed = false;
-
-                if (BaseApplication.nickName.equals("alice")) {
-                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/0209abf2449a4fe5ba9fafa90298f4e5?wsSecret=e3af3010487005961fe933cd01b230c8&wsTime=1498148950";
-                } else if (BaseApplication.nickName.equals("bob")) {
-                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/29528fa6d9714d12b4edab590efd51c0?wsSecret=5de3c1e118e2e8f33888c5e535c72f61&wsTime=1498149046";
-
-                } else if (BaseApplication.nickName.equals("root")) {
-                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/1c33a2fbfac74978b10caa7e9ef250f5?wsSecret=3a66174b01a3471a698dcfe560969b7c&wsTime=1498149062";
-
-                } else {
-                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/eb54c7f13acc4de3b269a80df9ff76f2?wsSecret=13d710866cbff6ef72e01f071c5d626f&wsTime=1497339630";
-                }
-                publishParam.bitrate = 600;//码率
-                publishParam.fps = 20;//帧率
+//                publishParam.watermark = false;
 //
-//                getRoom(BaseApplication.userId);
+//
+//                publishParam.flashEnable = false;
+//
+//
+//                publishParam.qosEnable = false;
+//
+//
+//                publishParam.graffitiOn = false;
+//
+//
+//                publishParam.useFilter = false;
+//
+//
+//                publishParam.zoomed = false;
+
+//                if (BaseApplication.nickName.equals("alice")) {
+//                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/0209abf2449a4fe5ba9fafa90298f4e5?wsSecret=e3af3010487005961fe933cd01b230c8&wsTime=1498148950";
+//                } else if (BaseApplication.nickName.equals("bob")) {
+//                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/29528fa6d9714d12b4edab590efd51c0?wsSecret=5de3c1e118e2e8f33888c5e535c72f61&wsTime=1498149046";
+//
+//                } else if (BaseApplication.nickName.equals("root")) {
+//                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/1c33a2fbfac74978b10caa7e9ef250f5?wsSecret=3a66174b01a3471a698dcfe560969b7c&wsTime=1498149062";
+//
+//                } else {
+//                    publishParam.pushUrl = "rtmp://p4622ebf4.live.126.net/live/eb54c7f13acc4de3b269a80df9ff76f2?wsSecret=13d710866cbff6ef72e01f071c5d626f&wsTime=1497339630";
+//                }
+//                publishParam.bitrate = 600;//码率
+//                publishParam.fps = 20;//帧率
+//
+               getRoom(BaseApplication.userId);
 //                createRoom(BaseApplication.userId);
 
-                Intent intent = new Intent(getActivity(), PrepareLiveActivity.class);
-                intent.putExtra("push_url", publishParam.pushUrl);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), PrepareLiveActivity.class);
+//                intent.putExtra("push_url", publishParam.pushUrl);
+//                startActivity(intent);
 
             }
         });
