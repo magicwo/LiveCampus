@@ -24,10 +24,27 @@ public class Urls {
      */
     public static final String CREATEROOMS = SERVER + "/room/create";
     /**
+     * 改变房间信息
+     */
+    public static final String UPDATEROOMS = SERVER + "/room/update";
+    /**
      * 获取房间列表
      */
     public static final String ROOMLIST = SERVER + "/room/roomlist";
 
+    /**
+     * 上传学生证
+     */
+    public static final String CERTIFICATION = SERVER + "/user/certification/upload";
 
+    /**
+     * 直播间封面照片
+     */
+    public static final String COVER = SERVER + "/room/cover/upload";
+
+    /**
+     * 获取用户的信息
+     */
+    public static final String USERINFO = SERVER + "/user/userinfo";
 }
 

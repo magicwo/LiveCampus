@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.dinuscxj.itemdecoration.GridOffsetsItemDecoration;
 import com.liji.circleimageview.CircleImageView;
 import com.lzy.okgo.OkGo;
@@ -88,6 +89,7 @@ public class IndexFragment extends AppBaseFragment {
         offsetsItemDecoration.setVerticalItemOffsets(15);
         offsetsItemDecoration.setHorizontalItemOffsets(15);
         recyclerView.addItemDecoration(offsetsItemDecoration);
+        Glide.with(getActivity()).load(BaseApplication.headUrl).placeholder(R.drawable.default_head).into(headImageView);
         headImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

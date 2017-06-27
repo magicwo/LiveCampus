@@ -8,14 +8,17 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.liji.circleimageview.CircleImageView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.request.BaseRequest;
+import com.magicwo.com.magiclib.constant.DataSaveConstant;
 import com.uestc.magicwo.livecampus.BaseApplication;
 import com.uestc.magicwo.livecampus.LoginActivity;
 import com.uestc.magicwo.livecampus.R;
 import com.uestc.magicwo.livecampus.appbase.AppBaseFragment;
 import com.uestc.magicwo.livecampus.models.RoomInfoResponse;
+import com.uestc.magicwo.livecampus.models.UserInfoResponse;
 import com.uestc.magicwo.livecampus.net.BaseResponse;
 import com.uestc.magicwo.livecampus.net.JsonCallback;
 import com.uestc.magicwo.livecampus.net.JsonUploadCallback;
@@ -60,7 +63,7 @@ public class DrawerFragment extends AppBaseFragment {
 
     @Override
     public void initView() {
-
+        getUserInfo(BaseApplication.userId);//获取用户信息
         drawerHeadImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +140,7 @@ public class DrawerFragment extends AppBaseFragment {
 //                publishParam.bitrate = 600;//码率
 //                publishParam.fps = 20;//帧率
 //
-               getRoom(BaseApplication.userId);
+                getRoom(BaseApplication.userId);
 //                createRoom(BaseApplication.userId);
 
 //                Intent intent = new Intent(getActivity(), PrepareLiveActivity.class);
@@ -171,6 +174,10 @@ public class DrawerFragment extends AppBaseFragment {
                         Log.e("-----------直播间信息", roomInfoResponseBaseResponse.getRet().getPushUrl());
                         Intent intent = new Intent(getActivity(), PrepareLiveActivity.class);
                         intent.putExtra("push_url", roomInfoResponseBaseResponse.getRet().getPushUrl());
+                        intent.putExtra("rid", roomInfoResponseBaseResponse.getRet().getRid());
+                        intent.putExtra("title", roomInfoResponseBaseResponse.getRet().getTitle());
+                        intent.putExtra("description", roomInfoResponseBaseResponse.getRet().getDescription());
+                        intent.putExtra("cover", roomInfoResponseBaseResponse.getRet().getCover());
                         startActivity(intent);
                     }
                 });
@@ -198,6 +205,9 @@ public class DrawerFragment extends AppBaseFragment {
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
                         Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (e.getMessage().equals("用户未通过认证无法创建直播间")) {
+                            startActivity(new Intent(getActivity(), CertificateActivity.class));
+                        }
 
                     }
 
@@ -206,6 +216,25 @@ public class DrawerFragment extends AppBaseFragment {
                         getRoom(uid);
                     }
                 });
+    }
+
+    /**
+     * 获得用户信息
+     */
+    private void getUserInfo(String uid) {
+        OkGo.get(Urls.USERINFO + "?uid=" + uid)
+                .tag(this)
+                .execute(new JsonCallback<BaseResponse<UserInfoResponse>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<UserInfoResponse> userInfoResponseBaseResponse, Call call, Response response) {
+                        //保存用户信息
+                        BaseApplication.saveUserInfo(BaseApplication.token, userInfoResponseBaseResponse.getRet().getUserID(), userInfoResponseBaseResponse.getRet().getUsername(), BaseApplication.pwd);
+                        BaseApplication.headUrl = userInfoResponseBaseResponse.getRet().getImgAvatar();
+                        BaseApplication.sharedPreferencesHelper.saveString(DataSaveConstant.HEADURL, BaseApplication.headUrl);
+                        Glide.with(getActivity()).load(BaseApplication.headUrl).placeholder(R.drawable.default_head).into(drawerHeadImg);
+                    }
+                });
+
     }
 
     @Override

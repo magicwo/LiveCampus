@@ -240,7 +240,8 @@ public class NEVideoPlayerActivity extends Activity {
                     @Override
                     public void onSuccess(IMqttToken asyncActionToken) {
                         Log.e("-------------->", "发送弹幕成功");
-                        addDanmaku(text, true);
+//                        addDanmaku(text, true);
+                        clearText();
 
                     }
 
@@ -257,6 +258,11 @@ public class NEVideoPlayerActivity extends Activity {
         );
 
 
+    }
+
+    private void clearText() {
+        if (editText != null)
+            editText.setText("");
     }
 
     public class PushMessageReceiver extends BroadcastReceiver {

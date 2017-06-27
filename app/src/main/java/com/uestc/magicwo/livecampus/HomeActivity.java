@@ -18,6 +18,7 @@ import android.view.KeyEvent;
 import android.widget.FrameLayout;
 
 import com.magicwo.com.magiclib.base.BaseActivity;
+import com.pgyersdk.update.PgyUpdateManager;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.uestc.magicwo.livecampus.appbase.AppBaseActivity;
@@ -119,6 +120,7 @@ public class HomeActivity extends AppBaseActivity implements OnTabSelectListener
         ButterKnife.bind(this);
         setMenuFragment();
         setMainFragment();
+        PgyUpdateManager.register(this,"magicwo_livecampus");
 
 
     }

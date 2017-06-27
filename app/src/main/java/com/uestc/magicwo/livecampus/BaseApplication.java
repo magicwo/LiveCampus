@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.view.CropImageView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -11,6 +13,7 @@ import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
 import com.magicwo.com.magiclib.constant.DataSaveConstant;
 import com.pgyersdk.crash.PgyCrashManager;
+import com.pgyersdk.update.PgyUpdateManager;
 import com.uestc.magicwo.livecampus.sp.SharedPreferencesHelper;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -42,11 +45,13 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         PgyCrashManager.register(this);
+
         setupSharedPreferences();
 
         setOkGo();//网络请求库的初始化
 //
         setYunBa();//云吧推送
+        initImagePicker();
 
 
     }
@@ -189,6 +194,24 @@ public class BaseApplication extends Application {
         sharedPreferencesHelper.saveString(DataSaveConstant.NICKNAME, userName);
         sharedPreferencesHelper.saveString(DataSaveConstant.PWD, pwd);
 
+    }
+
+    /**
+     * 图片选择器必须要有的配置，用来配置ImagePicker.这里由于该第三方库都是用的ImageView，无法用fresco，所以采用了Glide图片加载库来代替
+     * ps：整个图片选择器用到的都是Glide
+     */
+    private void initImagePicker() {
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new GlideImageLoader());   //设置图片加载器
+        imagePicker.setShowCamera(true);                      //显示拍照按钮
+        imagePicker.setCrop(true);                           //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(true);                   //是否按矩形区域保存
+        imagePicker.setSelectLimit(1);              //选中数量限制
+        imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+        imagePicker.setFocusWidth(800);                       //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(800);                      //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(1000);                         //保存文件的宽度。单位像素
+        imagePicker.setOutPutY(1000);                         //保存文件的高度。单位像素
     }
 
 }

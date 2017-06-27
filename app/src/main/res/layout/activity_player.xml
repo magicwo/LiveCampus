@@ -77,7 +77,7 @@
                     android:maxLines="5"
                     android:minHeight="18dp"
                     android:text=""
-                    android:textColor="#313131"
+                    android:textColor="#ffffff"
                     android:textColorHint="#88313131"
                     android:textSize="15sp" />
             </LinearLayout>

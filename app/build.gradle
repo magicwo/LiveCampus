@@ -55,4 +55,5 @@ dependencies {
     //b站弹幕显示框架
     compile files('libs/yunba-sdk-release1.8.5.jar')
     compile files('libs/pgyer_sdk_2.5.6.jar')
+    compile project(':imagepicker')
 }

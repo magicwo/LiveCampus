@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LiveCampusAndroid.iml" filepath="$PROJECT_DIR$/LiveCampusAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imagepicker/imagepicker.iml" filepath="$PROJECT_DIR$/imagepicker/imagepicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/magiclib/magiclib.iml" filepath="$PROJECT_DIR$/magiclib/magiclib.iml" />
     </modules>
   </component>

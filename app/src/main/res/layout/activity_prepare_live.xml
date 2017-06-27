@@ -14,13 +14,53 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/cover_image"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:scaleType="centerInside" />
+
+            <Button
+                android:id="@+id/select_pic_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/select_button_confirm"
+                android:text="选择封面图片"
+                android:textColor="@color/white" />
+
+            <TextView
+                style="@style/text_title_small"
+                android:background="@color/title_grey"
+                android:text="直播间标题" />
+
+            <EditText
+                android:id="@+id/edit_text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <TextView
+                style="@style/text_title_small"
+                android:background="@color/title_grey"
+                android:text="直播间描述" />
+
+            <EditText
+                android:id="@+id/edit_text_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
 
             <TextView
                 android:id="@+id/main_push_url"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:textIsSelectable="true" />
+                android:textIsSelectable="true"
+                android:visibility="gone" />
 
             <TextView
                 style="@style/text_title_small"
@@ -151,6 +191,8 @@
                 android:tag="false"
                 android:text="打开涂鸦" />
 
+
+
             <Button
                 android:id="@+id/main_start"
                 style="?android:attr/borderlessButtonStyle"
@@ -158,9 +200,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="20dp"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/select_button_confirm"
                 android:text="进入直播"
-                android:layout_marginBottom="20dp"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 

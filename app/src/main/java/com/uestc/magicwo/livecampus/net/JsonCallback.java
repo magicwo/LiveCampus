@@ -120,6 +120,8 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
                 throw new IllegalStateException("房间不存在或查询失败");
             } else if (code == 6047) {
                 throw new IllegalStateException("用户已存在房间");
+            } else if (code == 6063) {
+                throw new IllegalStateException("用户未通过认证无法创建直播间");
             } else {
                 throw new IllegalStateException(String.valueOf(baseResponse.getCode()));
             }
