@@ -39,6 +39,7 @@ import com.netease.LSMediaCapture.view.NeteaseGLSurfaceView;
 import com.netease.LSMediaCapture.view.NeteaseSurfaceView;
 import com.uestc.magicwo.livecampus.BaseApplication;
 import com.uestc.magicwo.livecampus.R;
+import com.uestc.magicwo.livecampus.utils.ScreenUtil;
 import com.uestc.magicwo.livecampus.videoplayer.NEVideoPlayerActivity;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -70,10 +71,8 @@ import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.ui.widget.DanmakuView;
 
 
-//由于直播推流的URL地址较长，可以直接在代码中的mliveStreamingURL设置直播推流的URL
 public class CameraPreviewActivity extends Activity implements OnClickListener, OnSeekBarChangeListener, lsMessageHandler {
 
-    //Demo控件
     private ImageView btnNetInfo = null;
     private ImageView btnFlash = null;
     private ImageView btnCancel = null;
@@ -285,6 +284,8 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
         mPublishParam = (PublishParam) getIntent().getSerializableExtra("data");
         //  注册广播
         broadcastMsgReceiver.register();
+
+//        ScreenUtil.getInstance(this).setEffetSysSetting(true);
         //  应用运行时，保持屏幕高亮，不锁屏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         //从直播设置页面获取推流URL和分辨率信息
@@ -359,6 +360,7 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
         lsMediaCapturePara.logLevel = lsLogUtil.LogLevel.INFO;  //设置日志级别
         lsMediaCapturePara.uploadLog = true; //是否上传SDK日志
         mLSMediaCapture = new lsMediaCapture(lsMediaCapturePara, mliveStreamingURL);
+        mLSMediaCapture.setCameraAutoFocus(true);
 
         maxZoomValue = mLSMediaCapture.getCameraMaxZoomValue();
         //2、设置直播参数
@@ -368,15 +370,7 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
 
         setContentView(R.layout.activity_livestreaming);
         ButterKnife.bind(this);
-        if (BaseApplication.nickName.equals("alice")) {
-            rid = "1";
-        } else if (BaseApplication.nickName.equals("bob")) {
-            rid = "2";
-        } else if (BaseApplication.nickName.equals("root")) {
-            rid = "3";
-        } else {
-            rid = "4";
-        }
+
         initDanmakus();//初始化弹幕相关
         registerReceiver();
 
@@ -731,6 +725,7 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
             danmakuView.pause();
         }
         super.onPause();
+        ScreenUtil.getInstance(this).stop();
     }
 
     protected void onResume() {
@@ -748,6 +743,7 @@ public class CameraPreviewActivity extends Activity implements OnClickListener, 
         if (danmakuView != null && danmakuView.isPrepared() && danmakuView.isPaused()) {
             danmakuView.resume();
         }
+        ScreenUtil.getInstance(this).start(this);
     }
 
     //开始直播

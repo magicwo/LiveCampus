@@ -100,7 +100,7 @@
         </activity>
         <activity
             android:name="com.uestc.magicwo.livecampus.SplashActivity"
-            android:theme="@style/MyAppSplash">
+            android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -134,7 +134,7 @@
         <activity
             android:name=".videostreaming.CameraPreviewActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/FullScreen" />
 
         <!-- pgy-->
