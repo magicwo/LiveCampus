@@ -60,12 +60,7 @@ public class SplashActivity extends AppBaseActivity {
         setContentView(R.layout.layout_splash);
         ButterKnife.bind(this);
         initDanmakus();
-        if (BaseApplication.userId != null && !BaseApplication.userId.equals("")) {
-            login();
-        } else {
-            startActivity(new Intent(this, HomeActivity.class));
-            this.finish();
-        }
+
 
     }
 
@@ -93,7 +88,12 @@ public class SplashActivity extends AppBaseActivity {
 
             @Override
             public void drawingFinished() {
-
+                if (BaseApplication.userId != null && !BaseApplication.userId.equals("")) {
+                    login();
+                } else {
+                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                    SplashActivity.this.finish();
+                }
             }
         });
         danmakuContext = DanmakuContext.create();

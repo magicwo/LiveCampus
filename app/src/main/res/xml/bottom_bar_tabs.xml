@@ -8,13 +8,13 @@
     <tab
         id="@+id/tab_live"
         icon="@drawable/icon_through_selector"
-        title="直播"
+        title="关注"
         activeColor="#35b1e0"
         />
     <tab
         id="@+id/tab_user"
         icon="@drawable/icon_message_selector"
-        title="个人"
+        title="我的"
         activeColor="#35b1e0"
         />
 

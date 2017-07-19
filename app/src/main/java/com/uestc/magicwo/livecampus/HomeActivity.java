@@ -46,8 +46,8 @@ public class HomeActivity extends AppBaseActivity implements OnTabSelectListener
     CustomViewPager viewPager;
     @BindView(R.id.bottomBar)
     BottomBar bottomBar;
-    @BindView(R.id.left_drawer)
-    FrameLayout leftDrawer;
+//    @BindView(R.id.left_drawer)
+//    FrameLayout leftDrawer;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
@@ -118,7 +118,7 @@ public class HomeActivity extends AppBaseActivity implements OnTabSelectListener
 
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        setMenuFragment();
+//        setMenuFragment();
         setMainFragment();
         PgyUpdateManager.register(this,"magicwo_livecampus");
 
@@ -135,7 +135,7 @@ public class HomeActivity extends AppBaseActivity implements OnTabSelectListener
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.left_drawer, new DrawerFragment());
+//        fragmentTransaction.add(R.id.left_drawer, new DrawerFragment());
 
         fragmentTransaction.commitAllowingStateLoss();
     }

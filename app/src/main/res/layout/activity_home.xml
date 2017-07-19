@@ -20,17 +20,16 @@
         <com.roughike.bottombar.BottomBar
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:visibility="gone"
             app:bb_tabXmlResource="@xml/bottom_bar_tabs" />
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/left_drawer"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/white" />
+    <!--<FrameLayout-->
+        <!--android:id="@+id/left_drawer"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="start"-->
+        <!--android:background="@color/white" />-->
 </android.support.v4.widget.DrawerLayout>
 
