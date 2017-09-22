@@ -8,10 +8,9 @@ import com.uestc.magicwo.livecampus.appbase.AppBaseFragment;
 public class LiveFragment extends AppBaseFragment {
 
 
-
     @Override
     public int setContentLayout() {
-        return R.layout.fragment_drawer;
+        return R.layout.fragment_second_layout;
     }
 
     @Override

@@ -11,9 +11,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.uestc.magicwo.livecampus.R;
 import com.uestc.magicwo.livecampus.models.RoomBaseInfoResponse;
 import com.uestc.magicwo.livecampus.net.Urls;
+import com.uestc.magicwo.livecampus.utils.ImageLoader;
 
 import java.util.List;
 
@@ -90,7 +92,8 @@ public class IndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 if (data.getCover() == null || data.getCover().equals("")) {
                     Glide.with(context).load("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498155090964&di=f332a920017af3b784245f5d2bd6c9d5&imgtype=0&src=http%3A%2F%2Fimgstore.cdn.sogou.com%2Fapp%2Fa%2F100540002%2F481521.jpg").into(((ItemViewHolder) holder).imageView);
                 } else {
-                    Glide.with(context).load(Urls.SERVER+data.getCover()).into(((ItemViewHolder) holder).imageView);
+                    ImageLoader.loadWithoutCache(context,((ItemViewHolder) holder).imageView,Urls.SERVER+data.getCover());
+//                    Glide.with(context).load(Urls.SERVER+data.getCover()).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(((ItemViewHolder) holder).imageView);
                 }
                 ((ItemViewHolder) holder).nickNameTextView.setText(data.getUsername());
             }

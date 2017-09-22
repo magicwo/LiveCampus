@@ -2,8 +2,12 @@ package com.uestc.magicwo.livecampus.user;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,7 @@ import com.uestc.magicwo.livecampus.net.BaseResponse;
 import com.uestc.magicwo.livecampus.net.JsonCallback;
 import com.uestc.magicwo.livecampus.net.SimpleResponse;
 import com.uestc.magicwo.livecampus.net.Urls;
+import com.uestc.magicwo.livecampus.utils.ImageLoader;
 import com.uestc.magicwo.livecampus.videostreaming.PrepareLiveActivity;
 import com.uestc.magicwo.livecampus.videostreaming.PublishParam;
 
@@ -30,6 +35,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import butterknife.Unbinder;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -45,12 +51,24 @@ public class UserFragment extends AppBaseFragment {
     TextView drawerContent;
     @BindView(R.id.drawer_live_tv)
     TextView drawerLiveTv;
-    @BindView(R.id.drawer_wallet_tv)
-    TextView drawerWalletTv;
-    @BindView(R.id.drawer_setting_tv)
-    TextView drawerSettingTv;
-    @BindView(R.id.drawer_recommended_tv)
-    TextView drawerRecommendedTv;
+    @BindView(R.id.edit_data_layout)
+    LinearLayout editDataLayout;
+    @BindView(R.id.message_tv)
+    TextView messageTv;
+    @BindView(R.id.message_layout)
+    LinearLayout messageLayout;
+    @BindView(R.id.follow_tv)
+    TextView followTv;
+    @BindView(R.id.guanzhu_layout)
+    LinearLayout guanzhuLayout;
+    @BindView(R.id.aixin_tv)
+    TextView aixinTv;
+    @BindView(R.id.aixin_layout)
+    LinearLayout aixinLayout;
+    @BindView(R.id.drawer_live_layout)
+    LinearLayout drawerLiveLayout;
+    Unbinder unbinder;
+
 
     @Override
     public int setContentLayout() {
@@ -69,8 +87,15 @@ public class UserFragment extends AppBaseFragment {
 
             }
         });
+        editDataLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UserInfoActivity.class);
+                startActivity(intent);
+            }
+        });
         drawerName.setText(BaseApplication.nickName);
-        drawerLiveTv.setOnClickListener(new View.OnClickListener() {
+        drawerLiveLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (BaseApplication.userId == null || BaseApplication.userId.equals("")) {
@@ -227,7 +252,7 @@ public class UserFragment extends AppBaseFragment {
                         BaseApplication.saveUserInfo(BaseApplication.token, userInfoResponseBaseResponse.getRet().getUserID(), userInfoResponseBaseResponse.getRet().getUsername(), BaseApplication.pwd);
                         BaseApplication.headUrl = userInfoResponseBaseResponse.getRet().getImgAvatar();
                         BaseApplication.sharedPreferencesHelper.saveString(DataSaveConstant.HEADURL, BaseApplication.headUrl);
-                        Glide.with(getActivity()).load(BaseApplication.headUrl).placeholder(R.drawable.default_head).into(drawerHeadImg);
+                        ImageLoader.load(getActivity(), drawerHeadImg, BaseApplication.headUrl);
                     }
                 });
 
@@ -237,6 +262,5 @@ public class UserFragment extends AppBaseFragment {
     public void loadData() {
 
     }
-
 
 }

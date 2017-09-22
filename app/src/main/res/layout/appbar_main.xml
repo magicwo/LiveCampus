@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="首页"
+        android:text=""
         android:textColor="#ffffff" />
 
     <LinearLayout
@@ -36,7 +36,8 @@
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_gravity="left"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="gone">
 
         <com.liji.circleimageview.CircleImageView
             android:id="@+id/head_image_view"

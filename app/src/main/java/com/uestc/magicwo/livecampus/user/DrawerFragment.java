@@ -49,12 +49,6 @@ public class DrawerFragment extends AppBaseFragment {
     TextView drawerContent;
     @BindView(R.id.drawer_live_tv)
     TextView drawerLiveTv;
-    @BindView(R.id.drawer_wallet_tv)
-    TextView drawerWalletTv;
-    @BindView(R.id.drawer_setting_tv)
-    TextView drawerSettingTv;
-    @BindView(R.id.drawer_recommended_tv)
-    TextView drawerRecommendedTv;
 
     @Override
     public int setContentLayout() {

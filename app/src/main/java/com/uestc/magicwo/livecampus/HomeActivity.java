@@ -148,7 +148,7 @@ public class HomeActivity extends AppBaseActivity implements OnTabSelectListener
 
         //首页
         IndexFragment indexFragment = new IndexFragment();
-        indexFragment.setOnStartDrawerListener(this);
+//        indexFragment.setOnStartDrawerListener(this);
         mFragmentList.add(indexFragment);
 
         //直播

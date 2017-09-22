@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/main_tool_view"
+        layout="@layout/appbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/above_head" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/head_image_layout"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="头像" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right" />
+
+                <ImageView
+                    android:id="@+id/head_image_imageView"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/default_head" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/nick_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="昵称" />
+
+                <TextView
+                    android:id="@+id/nick_name_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="Magicwo" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/righ_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/email_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="邮箱" />
+
+                <TextView
+                    android:id="@+id/email_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="360116932@qq.com" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/righ_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/phone_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="电话" />
+
+                <TextView
+                    android:id="@+id/phone_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="18190712700" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/righ_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sex_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="性别" />
+
+                <TextView
+                    android:id="@+id/sex_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="男" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/righ_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/age_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="年龄" />
+
+                <TextView
+                    android:id="@+id/age_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="18" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/righ_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/student_id_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="学生证号" />
+
+                <TextView
+                    android:id="@+id/student_id_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="201621010514" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/righ_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/register_time_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="注册时间" />
+
+                <TextView
+                    android:id="@+id/register_time_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="2016年9月26日" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/last_login_time_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上次登录时间" />
+
+                <TextView
+                    android:id="@+id/last_login_time_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="2017年9月22日" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/student_image_layout"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="学生证照片" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right" />
+
+                <ImageView
+                    android:id="@+id/student_image_imageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/default_head" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

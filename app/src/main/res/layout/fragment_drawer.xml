@@ -3,114 +3,225 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
+
     android:orientation="vertical">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="#F1F6FE"
-        android:padding="17dp">
-
-        <com.liji.circleimageview.CircleImageView
-            android:id="@+id/drawer_head_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/default_head" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="23dp"
-            android:layout_toRightOf="@+id/drawer_head_img"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/drawer_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/textColorBlack"
-                android:textSize="18dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/bg_icon"
+                android:padding="17dp">
 
-            <TextView
-                android:id="@+id/drawer_content"
-                android:layout_width="wrap_content"
+                <com.liji.circleimageview.CircleImageView
+                    android:id="@+id/drawer_head_img"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/default_head" />
+
+                <LinearLayout
+                    android:id="@+id/edit_data_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="23dp"
+                    android:layout_toRightOf="@+id/drawer_head_img"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/drawer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/textColorBlack"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:id="@+id/drawer_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="修改资料"
+                            android:textColor="@color/textColorHint"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="3dp"
+                        android:src="@drawable/right_arrow_blue" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/message_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text=""
-                android:textColor="@color/textColorHint"
-                android:textSize="12dp" />
+                android:background="@drawable/commom_rect_selector"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/message_icon" />
+
+                <TextView
+                    android:id="@+id/message_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="57dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="33dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="17dp"
+                    android:paddingRight="17dp"
+                    android:text="消息"
+                    android:textColor="@color/textColorBlack"
+                    android:textSize="16dp"
+
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/text_20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/righ_arrow" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/guanzhu_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/commom_rect_selector"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/wangguan_icon" />
+
+                <TextView
+                    android:id="@+id/follow_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="57dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="33dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="17dp"
+                    android:paddingRight="17dp"
+                    android:text="关注"
+                    android:textColor="@color/textColorBlack"
+                    android:textSize="16dp"
+
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/text_20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/righ_arrow" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/aixin_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/commom_rect_selector"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/aixin_icon" />
+
+                <TextView
+                    android:id="@+id/aixin_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="57dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="33dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="17dp"
+                    android:paddingRight="17dp"
+                    android:text="粉丝"
+                    android:textColor="@color/textColorBlack"
+                    android:textSize="16dp"
+
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/text_20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/righ_arrow" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/drawer_live_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/commom_rect_selector"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/aixin_icon" />
+
+                <TextView
+                    android:id="@+id/drawer_live_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="57dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="33dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="17dp"
+                    android:paddingRight="17dp"
+                    android:text="我要直播！！！"
+                    android:textColor="@color/textColorBlack"
+                    android:textSize="16dp"
+
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/text_20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/righ_arrow" />
+            </LinearLayout>
+
         </LinearLayout>
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/drawer_live_tv"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@drawable/commom_rect_selector"
-            android:drawableLeft="@drawable/icon_ct_like"
-            android:drawablePadding="33dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp"
-            android:text="我要直播！！！"
-            android:textColor="@color/textColorBlack"
-            android:textSize="16dp"
-
-            />
-
-        <TextView
-            android:id="@+id/drawer_wallet_tv"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@drawable/commom_rect_selector"
-            android:drawableLeft="@drawable/icon_ct_wallet"
-            android:drawablePadding="33dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp"
-            android:text="我的积分"
-            android:textColor="@color/textColorBlack"
-            android:textSize="16dp"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/drawer_setting_tv"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@drawable/commom_rect_selector"
-            android:drawableLeft="@drawable/icon_ct_set_up"
-            android:drawablePadding="33dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp"
-            android:text="设置"
-            android:textColor="@color/textColorBlack"
-            android:textSize="16dp"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/drawer_recommended_tv"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@drawable/commom_rect_selector"
-            android:drawableLeft="@drawable/icon_ct_recommended"
-            android:drawablePadding="33dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp"
-            android:text="应用推荐"
-            android:textColor="@color/textColorBlack"
-            android:textSize="16dp"
-            android:visibility="gone" />
-
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
