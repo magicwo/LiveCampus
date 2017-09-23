@@ -24,6 +24,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 import com.uestc.magicwo.livecampus.appbase.AppBaseActivity;
 import com.uestc.magicwo.livecampus.custom.CustomViewPager;
 import com.uestc.magicwo.livecampus.index.IndexFragment;
+import com.uestc.magicwo.livecampus.index.IndexMainFragment;
 import com.uestc.magicwo.livecampus.live.LiveFragment;
 import com.uestc.magicwo.livecampus.user.UserFragment;
 import com.uestc.magicwo.livecampus.user.DrawerFragment;
@@ -147,9 +148,9 @@ public class HomeActivity extends AppBaseActivity implements OnTabSelectListener
         mFragmentList = new ArrayList<>();
 
         //首页
-        IndexFragment indexFragment = new IndexFragment();
+        IndexMainFragment indexMainFragment = new IndexMainFragment();
 //        indexFragment.setOnStartDrawerListener(this);
-        mFragmentList.add(indexFragment);
+        mFragmentList.add(indexMainFragment);
 
         //直播
         LiveFragment liveFragment = new LiveFragment();

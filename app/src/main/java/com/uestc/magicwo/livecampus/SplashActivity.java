@@ -138,7 +138,7 @@ public class SplashActivity extends AppBaseActivity {
             public void run() {
                 String s;
                 for (int i = 0; i <danmus.length; i++) {
-                    int time =4*( new Random().nextInt(300));
+                    int time = new Random().nextInt(300);
                     s = danmus[i];
                     if (s != null)
                         addDanmaku(s, false);

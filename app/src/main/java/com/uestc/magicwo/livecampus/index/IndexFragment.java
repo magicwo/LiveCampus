@@ -2,6 +2,7 @@ package com.uestc.magicwo.livecampus.index;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -29,6 +30,7 @@ import com.uestc.magicwo.livecampus.BaseApplication;
 import com.uestc.magicwo.livecampus.appbase.AppBaseFragment;
 import com.uestc.magicwo.livecampus.videostreaming.PrepareLiveActivity;
 
+import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,18 +46,23 @@ public class IndexFragment extends AppBaseFragment {
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
-    @BindView(R.id.assort)
-    TextView assort;
-    @BindView(R.id.head_image_view)
-    CircleImageView headImageView;
-    @BindView(R.id.head_layout)
-    LinearLayout headLayout;
+
+    int roomType;
 
 
     private IndexAdapter indexAdapter;
     private List<RoomBaseInfoResponse> datas;
 
     private OnStartDrawerListener mOnStartDrawerListener;
+
+    public static IndexFragment newInstance(int roomType) {
+        IndexFragment indexFragment = new IndexFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("roomType", roomType);
+        indexFragment.setArguments(bundle);
+        return indexFragment;
+
+    }
 
     public void setOnStartDrawerListener(OnStartDrawerListener onStartDrawerListener) {
         mOnStartDrawerListener = onStartDrawerListener;
@@ -64,6 +71,15 @@ public class IndexFragment extends AppBaseFragment {
     @Override
     public int setContentLayout() {
         return R.layout.fragment_first;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
+        if (args != null)
+            roomType = args.getInt("roomType");
+        else roomType = 0;
     }
 
     @Override
@@ -89,15 +105,7 @@ public class IndexFragment extends AppBaseFragment {
         offsetsItemDecoration.setVerticalItemOffsets(15);
         offsetsItemDecoration.setHorizontalItemOffsets(15);
         recyclerView.addItemDecoration(offsetsItemDecoration);
-        Glide.with(getActivity()).load(BaseApplication.headUrl).placeholder(R.drawable.default_head).into(headImageView);
-        headImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnStartDrawerListener != null) {
-                    mOnStartDrawerListener.openDrawer();
-                }
-            }
-        });
+
 
     }
 
@@ -256,43 +264,43 @@ public class IndexFragment extends AppBaseFragment {
      * 获取房间
      */
     private void getRooms() {
-        OkGo.get(Urls.ROOMLIST + "?records=" + 200 + "&pnum=" + 1)
-                .tag(this)
-                .execute(new JsonCallback<BaseResponse<RoomList>>() {
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                        refreshLayout.setRefreshing(false);
-                    }
+        if (roomType != 1) {
+            OkGo.get(Urls.ROOMLIST + "?records=" + 200 + "&pnum=" + 1)
+                    .tag(this)
+                    .execute(new JsonCallback<BaseResponse<RoomList>>() {
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            super.onError(call, response, e);
+                            refreshLayout.setRefreshing(false);
+                        }
 
-                    @Override
-                    public void onSuccess(BaseResponse<RoomList> roomListBaseResponse, Call call, Response response) {
-                        datas.clear();
-                        datas.addAll(roomListBaseResponse.getRet().getList());
-                        indexAdapter.notifyDataSetChanged();
-                        refreshLayout.setRefreshing(false);
-                    }
-                });
-//        datas.clear();
-//        RoomBaseInfoResponse roomBaseInfoResponse = new RoomBaseInfoResponse();
-//        roomBaseInfoResponse.setDescription("Alice的直播间");
-//        roomBaseInfoResponse.setUsername("Alice");
-//        roomBaseInfoResponse.setRid("1");
-//        roomBaseInfoResponse.setCover("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498160494473&di=33a7f471ec4f1758989fb8b22e8a7183&imgtype=0&src=http%3A%2F%2Ftupian.enterdesk.com%2F2013%2Fmxy%2F10%2F12%2F2%2F4.jpg");
-//        datas.add(roomBaseInfoResponse);
-//        RoomBaseInfoResponse roomBaseInfoResponse2 = new RoomBaseInfoResponse();
-//        roomBaseInfoResponse2.setDescription("Bob的直播间");
-//        roomBaseInfoResponse2.setUsername("Bob");
-//        roomBaseInfoResponse2.setRid("2");
-//        roomBaseInfoResponse2.setCover("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1498160494471&di=30a5af615ee7ef76f93e69d63f7b43e1&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fa%2F568cd27741af5.jpg");
-//        datas.add(roomBaseInfoResponse2);
-//        RoomBaseInfoResponse roomBaseInfoResponse3 = new RoomBaseInfoResponse();
-//        roomBaseInfoResponse3.setDescription("Root的直播间");
-//        roomBaseInfoResponse3.setUsername("Root");
-//        roomBaseInfoResponse3.setRid("3");
-//        datas.add(roomBaseInfoResponse3);
-//        indexAdapter.notifyDataSetChanged();
-//        refreshLayout.setRefreshing(false);
+                        @Override
+                        public void onSuccess(BaseResponse<RoomList> roomListBaseResponse, Call call, Response response) {
+                            datas.clear();
+                            datas.addAll(roomListBaseResponse.getRet().getList());
+                            indexAdapter.notifyDataSetChanged();
+                            refreshLayout.setRefreshing(false);
+                        }
+                    });
+        } else {
+            OkGo.get(Urls.ONLINEROOMS)
+                    .tag(this)
+                    .execute(new JsonCallback<BaseResponse<RoomList>>() {
+                        @Override
+                        public void onSuccess(BaseResponse<RoomList> roomListBaseResponse, Call call, Response response) {
+                            datas.clear();
+                            datas.addAll(roomListBaseResponse.getRet().getList());
+                            indexAdapter.notifyDataSetChanged();
+                            refreshLayout.setRefreshing(false);
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            super.onError(call, response, e);
+                            refreshLayout.setRefreshing(false);
+                        }
+                    });
+        }
 
 
     }

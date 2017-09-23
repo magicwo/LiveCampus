@@ -46,5 +46,9 @@ public class Urls {
      * 获取用户的信息
      */
     public static final String USERINFO = SERVER + "/user/userinfo";
+    /**
+     * 获取正在直播的房间列表
+     */
+    public static final String ONLINEROOMS = SERVER + "/room/onlineroomlist";
 }
 

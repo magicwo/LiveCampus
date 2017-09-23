@@ -3,12 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/main_tool_view"
-        layout="@layout/appbar_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/above_head" />
+
 
     <TextView
         android:layout_width="match_parent"
