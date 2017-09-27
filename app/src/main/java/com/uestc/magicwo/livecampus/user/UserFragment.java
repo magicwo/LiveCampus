@@ -20,6 +20,7 @@ import com.uestc.magicwo.livecampus.BaseApplication;
 import com.uestc.magicwo.livecampus.LoginActivity;
 import com.uestc.magicwo.livecampus.R;
 import com.uestc.magicwo.livecampus.appbase.AppBaseFragment;
+import com.uestc.magicwo.livecampus.event.MessageEvent;
 import com.uestc.magicwo.livecampus.models.RoomInfoResponse;
 import com.uestc.magicwo.livecampus.models.UserInfoResponse;
 import com.uestc.magicwo.livecampus.net.BaseResponse;
@@ -30,6 +31,9 @@ import com.uestc.magicwo.livecampus.utils.ImageLoader;
 import com.uestc.magicwo.livecampus.videostreaming.PrepareLiveActivity;
 import com.uestc.magicwo.livecampus.videostreaming.PublishParam;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -75,8 +79,16 @@ public class UserFragment extends AppBaseFragment {
         return R.layout.fragment_drawer;
     }
 
+    //传递回来的消息
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(MessageEvent messageEvent) {
+        drawerName.setText(messageEvent.getMessage());
+        BaseApplication.saveUserInfo(BaseApplication.token, BaseApplication.userId, messageEvent.getMessage(), BaseApplication.pwd);
+    }
+
     @Override
     public void initView() {
+        EventBus.getDefault().register(this);
         getUserInfo(BaseApplication.userId);//获取用户信息
         drawerHeadImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,4 +275,9 @@ public class UserFragment extends AppBaseFragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

@@ -88,12 +88,12 @@ public class SplashActivity extends AppBaseActivity {
 
             @Override
             public void drawingFinished() {
-                if (BaseApplication.userId != null && !BaseApplication.userId.equals("")) {
+//                if (BaseApplication.userId != null && !BaseApplication.userId.equals("")) {
                     login();
-                } else {
+//                } else {
                     startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                     SplashActivity.this.finish();
-                }
+//                }
             }
         });
         danmakuContext = DanmakuContext.create();
@@ -165,8 +165,8 @@ public class SplashActivity extends AppBaseActivity {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                        SplashActivity.this.finish();
+//                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+//                        SplashActivity.this.finish();
                     }
 
                     @Override
@@ -177,8 +177,8 @@ public class SplashActivity extends AppBaseActivity {
                             HttpHeaders headers = new HttpHeaders();
                             headers.put("Authorization", "Bearer " + BaseApplication.token);
                             OkGo.getInstance().addCommonHeaders(headers);
-                            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                            SplashActivity.this.finish();
+//                            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+//                            SplashActivity.this.finish();
 
 
                         }

@@ -93,6 +93,10 @@
         <activity
             android:name=".user.UserInfoActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".user.EditActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="com.uestc.magicwo.livecampus.videoplayer.NEVideoPlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

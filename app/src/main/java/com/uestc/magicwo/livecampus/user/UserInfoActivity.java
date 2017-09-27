@@ -1,6 +1,7 @@
 package com.uestc.magicwo.livecampus.user;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,11 +12,16 @@ import com.magicwo.com.magiclib.constant.DataSaveConstant;
 import com.uestc.magicwo.livecampus.BaseApplication;
 import com.uestc.magicwo.livecampus.R;
 import com.uestc.magicwo.livecampus.appbase.AppBaseActivity;
+import com.uestc.magicwo.livecampus.event.MessageEvent;
 import com.uestc.magicwo.livecampus.models.UserInfoResponse;
 import com.uestc.magicwo.livecampus.net.BaseResponse;
 import com.uestc.magicwo.livecampus.net.JsonCallback;
 import com.uestc.magicwo.livecampus.net.Urls;
 import com.uestc.magicwo.livecampus.utils.ImageLoader;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,6 +85,21 @@ public class UserInfoActivity extends AppBaseActivity {
         super.initView(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
+
+        nickNameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditActivity.runActivity(UserInfoActivity.this, 1, nickNameTextView.getText().toString());
+            }
+        });
+    }
+
+    //传递回来的消息
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(MessageEvent messageEvent) {
+        nickNameTextView.setText(messageEvent.getMessage());
+        BaseApplication.saveUserInfo(BaseApplication.token, BaseApplication.userId, messageEvent.getMessage(), BaseApplication.pwd);
     }
 
     @Override
@@ -90,6 +111,7 @@ public class UserInfoActivity extends AppBaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     /**
@@ -110,7 +132,7 @@ public class UserInfoActivity extends AppBaseActivity {
                         emailTextView.setText(userInfoResponseBaseResponse.getRet().getEmail());
                         phoneTextView.setText(userInfoResponseBaseResponse.getRet().getPhone());
                         sexTextView.setText(userInfoResponseBaseResponse.getRet().getSex());
-                        ageTextView.setText(userInfoResponseBaseResponse.getRet().getAge()+"");
+                        ageTextView.setText(userInfoResponseBaseResponse.getRet().getAge() + "");
                         studentIdTextView.setText(userInfoResponseBaseResponse.getRet().getStudentID());
                         registerTimeTextView.setText(userInfoResponseBaseResponse.getRet().getRegisterTime());
                         lastLoginTimeTextView.setText(userInfoResponseBaseResponse.getRet().getSignTime());

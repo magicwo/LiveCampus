@@ -50,5 +50,9 @@ public class Urls {
      * 获取正在直播的房间列表
      */
     public static final String ONLINEROOMS = SERVER + "/room/onlineroomlist";
+    /**
+     * 修改用户信息
+     */
+    public static final String UPDATEINFO = SERVER + "/user/info/update";
 }
 
