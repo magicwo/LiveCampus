@@ -119,7 +119,7 @@
         <!--云吧推送start-->
         <meta-data
             android:name="YUNBA_APPKEY"
-            android:value="5951c4af2a9275716fe3b289" />
+            android:value="5a1289ad2a27c9d728f52e2f" />
         <service
             android:name="io.yunba.android.core.YunBaService"
             android:exported="true" />
