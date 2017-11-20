@@ -1,4 +1,4 @@
-![image](http://note.youdao.com/favicon.ico)## 1、作品介绍
+## 1、作品介绍
 本作品是一套名为Live Campus来看的校园直播服务平台，由于传统为校内学生提供的以论坛为主的交互平台在视频业务快速发展的浪潮下已经无法满足学生日益增长的需求，并且传统的视频直播网站并没有重点关注校园这一细分市场，忽视了校园中的巨大直播需求。因此我们推出了Live Campus来看校园直播服务平台。直播平台能够为在校学生在课余生活中提供一个具有分享与展现个人魅力的平台，并能够提供主播与观众间交互式的视频直播与观看体验。
 
 ### 01 主流APP
@@ -38,4 +38,11 @@
 
 
 ## 5、作品展示
+
 ![iframe](https://github.com/magicwo/LiveCampus/blob/master/1.gif)
+
+![iframe](https://github.com/magicwo/LiveCampus/blob/master/2.gif)
+
+![iframe](https://github.com/magicwo/LiveCampus/blob/master/3.gif)
+
+![iframe](https://github.com/magicwo/LiveCampus/blob/master/4.gif)
