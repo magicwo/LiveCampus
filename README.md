@@ -38,11 +38,21 @@
 
 
 ## 5、作品展示
+### 我们的作品主要包括了后台服务器，Android 客户端以及web网页端。
+[点击体验网页测试版](http://www.campuslive.cn:8080/)
+## Android客户端已经实现了用户的注册登录、个人信息修改、主播认证以及主播进行直播、所有已登录用户可以在线观看直播。之后，此客户端可以在校园推广开来与电子科大的清水河畔BBS进行深度数据互通，那么学生们不仅能在河畔上看到文字直播，还能看到一些校园趣事的视频直播和视频录播，很好地提升了用户感受。今后，还可以将此app移植到行车记录仪上，对车辆的一个实时行车情况进行观察以及记录。
 
+##### 注册登录
 ![iframe](https://github.com/magicwo/LiveCampus/blob/master/1.gif)
 
+##### 未认证用户开启直播
 ![iframe](https://github.com/magicwo/LiveCampus/blob/master/2.gif)
 
+##### 已认证用户开启直播
 ![iframe](https://github.com/magicwo/LiveCampus/blob/master/3.gif)
 
+##### 观看直播
 ![iframe](https://github.com/magicwo/LiveCampus/blob/master/4.gif)
+
+##### 前端网页可以观看直播
+![iframe](https://github.com/magicwo/LiveCampus/blob/master/5.gif)
